@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <title>Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-left: 20px;
+            margin-right: 10px;
+        }
+        .banner {
+            display: flex;
+        }
+        .brick-icon {
+            max-width: 75x;
+            max-height: 75px;
+        }
+        .search-container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .submission-text {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .frequently-visited {
+            margin-left: 20px;
+        }
+        .set-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .set-img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        .set-caption {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>BRICKS FOR US</h1>
+        <img class="brick-icon" src="images/brick-icon.png"> 
+    </div>
+    <div class="search-container">
+        <h2>Search for a Lego set</h2>
+        <form action="/search" method="GET">
+            <input class="submission-text" name="query" placeholder="Enter LEGO set name...">
+            <input class="submit-button" value="Search">
+        </form>
+    </div>
+    <div class="frequently-visited">
+        <h3>Check out our most frequently visited Lego sets</h2>
+        <div class="set-grid">
+            <div class="set-card">
+                <img class="set-img" src="images/lego-set1.png">
+                <p class="set-caption">Trafalgar Square</p>
+            </div>
+            <div class="set-card">
+                <img class="set-img" src="images/lego-set2.jpg">
+                <p class="set-caption">City Block</p>
+            </div>
+            <div class="set-card">
+                <img class="set-img" src="images/lego-set3.jpg">
+                <p class="set-caption">Heavy Cargo Transport</p>
+            </div>
+            <div class="set-card">
+                <img class="set-img" src="images/lego-set4.jpg">
+                <p class="set-caption">Bengal Tiger</p>
+            </div>
+            <div class="set-card">
+                <img class="set-img" src="images/lego-set5.jpg">
+                <p class="set-caption">Police Station</p>
+            </div>
+            <div class="set-card">
+                <img class="set-img" src="images/lego-set6.jpg">
+                <p class="set-caption">Jungle Raider</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
