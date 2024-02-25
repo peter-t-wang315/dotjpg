@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Example</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Review Page</title>
+    <style>
+      .banner {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+      }
+      .brick-icon {
+        max-width: 75x;
+        max-height: 75px;
+      }
+      .content {
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        flex-direction: column;
+        margin-top: -40px;
+      }
+      .review-image {
+        max-width: 600px;
+        max-height: 400px;
+      }
+      .top-content {
+        border: 1px solid black;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .top-content-details {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .reviews {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .review {
+        display: flex;
+        margin: 10px 0;
+        background-color: #f9f9f9; /* Very light gray background */
+        border: 1px solid #ccc; /* Dark gray border */
+        border-radius: 5px;
+      }
+      .review > p {
+        padding: 10px;
+      }
+      .review-profile {
+        width: 15%;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        background-color: #f0f0f0;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <h2 style="padding: 0 10px; font-weight: bold">BRICKS FOR US</h2>
+      <img class="brick-icon" src="images/brick-icon.png" />
+    </div>
+    <div class="content">
+      <div class="top-content">
+        <h2 style="padding-bottom: 10px">Jungle Raider</h2>
+        <img class="review-image" src="images/lego-set6.jpg" />
+        <div class="top-content-details">
+          <div style="display: flex; flex-direction: column">
+            <p>127 pieces</p>
+            <p>$24.00</p>
+          </div>
+          <p>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+        </div>
+      </div>
+      <div class="reviews">
+        <div class="review">
+          <div class="review-profile">
+            <h5>Username 1</h5>
+            <p>Reviews: 3</p>
+            <p>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+          </div>
+          <p>
+            The LEGO Jungle Raider set offers a thrilling adventure in a compact
+            package. Designed for explorers and adventurers, this set captures
+            the essence of jungle exploration with its detailed features and
+            rugged design. Design & Build The Jungle Raider features a robust
+            design, perfect for navigating through dense foliage and rough
+            terrain. The vehicle is equipped with large, all-terrain wheels, a
+            sturdy roll cage, and a powerful engine, giving it an authentic
+            jungle expedition look. The build is engaging and straightforward,
+            making it suitable for both young and adult LEGO enthusiasts.
+            Minifigures The set includes two minifigures: a brave explorer and a
+            menacing jungle creature. The explorer is equipped with a backpack
+            and a machete, ready to uncover ancient mysteries. The jungle
+            creature adds a thrilling element to the adventure, with its
+            detailed design and posable features. Playability The Jungle Raider
+            is designed for action-packed play. Its rugged construction allows
+            it to tackle any obstacle, from fallen trees to hidden traps. The
+            vehicle's cockpit is accessible, allowing the minifigures to easily
+            hop in and out during their exploration. The set also includes
+            accessories such as a treasure chest and gems, adding to the
+            excitement of the adventure. Overall Overall, the LEGO Jungle Raider
+            set is a fantastic addition to any LEGO collection. Its detailed
+            design, exciting features, and playability make it a must-have for
+            fans of adventure and exploration. Whether you're embarking on a
+            solo expedition or facing off against jungle creatures with friends,
+            the Jungle Raider promises endless hours of imaginative play.
+          </p>
+        </div>
+        <div class="review">
+          <div class="review-profile">
+            <h5>Username 2</h5>
+            <p>Reviews: 15209</p>
+            <p>&#x2605;&#x2605;&#x2605;&#x2605;</p>
+          </div>
+          <p>This set was ok I suppose</p>
+        </div>
+        <div class="review">
+          <div class="review-profile">
+            <h5>Username 3</h5>
+            <p>Reviews: 1</p>
+            <p>&#x2605;&#x2605;&#x2605;&#x2605;</p>
+          </div>
+          <p>
+            Save ur boring unworthy earth attempted time savings. Buy urself
+            train tickets
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
