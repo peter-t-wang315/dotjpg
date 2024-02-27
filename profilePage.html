@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Profife Page</title>
+    <style>
+      .window {
+        font-size: 12pt;
+        font-family: Arial, sans-serif;
+      }
+      .banner {
+        background-color: grey;
+        padding: 10px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+      }
+      .brick-icon {
+        padding: 0px;
+        max-width: 65x;
+        max-height: 65px;
+      }
+      .profilePic {
+        max-height: 60px;
+        position: absolute;
+        right: 30px;
+      }
+      .log-out-btn {
+        margin-top: 15px;
+        position: absolute;
+        right: 120px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .edit-profile-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .title {
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 24pt;
+      }
+      .displayPic {
+        width: 250px;
+        margin-bottom: 30px;
+      }
+      .profile {
+        padding: 100px;
+        padding-top: 50px;
+      }
+      .profileLeftSpan {
+        font-size: 14pt;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .review {
+        padding: 10px;
+        margin: 10px;
+        background-color: #f9f9f9; /* Very light gray background */
+        border: 1px solid #ccc; /* Dark gray border */
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid window">
+      <div class="row banner">
+        <div class="col-md-6">
+          <span class="title">BRICKS FOR US</span>
+          <img class="brick-icon" src="images/brick-icon.png" />
+        </div>
+        <div class="col-md-2">
+          <form method="GET" action="mainpage.html">
+            <button class="log-out-btn" type="submit">Log Out</button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <img class="profilePic" src="images/profilePic.png" />
+        </div>
+      </div>
+      <div class="row profile">
+        <div class="col-md-4">
+          <img class="displayPic" src="images/profilePic.png" />
+          <div>
+            <h2>John Yates</h2>
+            <span class="profileLeftSpan">User1</span><br />
+            <span class="profileLeftSpan">Pullamn, WA</span>
+          </div>
+          <form method="GET" action="editProfile.html">
+            <button class ="edit-profile-btn" type="submit">Edit Profile</button>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <div class="info">
+            <h2>Bio</h2>
+            <p>
+              As a passionate LEGO enthusiast, I thrive on the boundless
+              creativity that comes with building brick by brick. From
+              constructing intricate cityscapes to crafting fantastical worlds,
+              my love for LEGO transcends mere hobbyism—it's a lifestyle.
+              Whether meticulously following instructions or daring to forge my
+              own designs, each set I assemble becomes a canvas for imagination.
+              My dedication to the LEGO community extends beyond my personal
+              creations; I revel in sharing tips, techniques, and marveling at
+              the ingenuity of fellow builders. With every new release, I
+              eagerly anticipate the next challenge and opportunity to immerse
+              myself in the colorful, interlocking universe of LEGO.
+            </p><br>
+            <h2>Favorite Categories</h2>
+            <p>
+              <ul>
+                <li>LEGO Star Wars</li>
+                <li>LEGO Harry Potter</li>
+                <li>LEGO ideas</li>
+              </ul>
+            </p><br>
+          </div>
+          <div class="row reviews">
+            <h2>Most Recent Reviews</h2>
+            <div class="col-md-3 review">
+              <h3>Set: 10271</h3>
+              <span>Rating: &#x2605;&#x2605;&#x2605;&#x2605;</span><br />
+              <span>On: 2/15/2024</span>
+            </div>
+            <div class="col-md-3 review">
+              <h3>Set: 75288</h3>
+              <span>Rating: &#x2605;&#x2605;</span><br />
+              <span>On: 1/1/2024</span>
+            </div>
+            <div class="col-md-3 review">
+              <h3>Set: 21322</h3>
+              <span>Rating: &#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span
+              ><br />
+              <span>On: 2/11/2024</span>
+            </div>
+          </div>
+          <div class="row reviews">
+            <div class="col-md-3 review">
+              <h3>Set: 42115</h3>
+              <span>Rating: &#x2605;</span><br />
+              <span>On: 2/1/2024</span>
+            </div>
+            <div class="col-md-3 review">
+              <h3>Set: 75978</h3>
+              <span>Rating: &#x2605;&#x2605;&#x2605;</span><br />
+              <span>On: 1/5/2024</span>
+            </div>
+            <div class="col-md-3 review">
+              <h3>Set: 76178</h3>
+              <span>Rating: &#x2605;&#x2605;&#x2605;&#x2605;</span><br />
+              <span>On: 9/15/2023</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
