@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Profife Page</title>
+    <style>
+      .window {
+        font-size: 12pt;
+        font-family: Arial, sans-serif;
+      }
+      .banner {
+        background-color: grey;
+        padding: 10px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+      }
+      .brick-icon {
+        padding: 0px;
+        max-width: 65x;
+        max-height: 65px;
+      }
+      .profilePic {
+        max-height: 60px;
+        position: absolute;
+        right: 30px;
+      }
+      .log-out-btn {
+        margin-top: 15px;
+        position: absolute;
+        right: 120px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .edit-profile-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .displayPic {
+        width: 250px;
+        margin-bottom: 30px;
+      }
+      .profile {
+        padding: 100px;
+        padding-top: 50px;
+      }
+      .profileLeftSpan {
+        font-size: 14pt;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .title {
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 24pt;
+      }
+      .textBoxText {
+        margin: 10px;
+        margin-left: 20px;
+        font-weight: bold;
+      }
+      .categories {
+        margin-left: 20px;
+      }
+      .textBox {
+        width: 400px;
+        margin: 10px;
+        margin-left: 20px;
+      }
+      .textArea {
+        width: 400px;
+        height: 200px;
+        margin: 10px;
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid window">
+      <div class="row banner">
+        <div class="col-md-6">
+          <span class="title">BRICKS FOR US</span>
+          <img class="brick-icon" src="images/brick-icon.png" />
+        </div>
+        <div class="col-md-2">
+          <form method="GET" action="loginPage.html">
+            <button class="log-out-btn" type="submit">Log Out</button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <img class="profilePic" src="images/profilePic.png" />
+        </div>
+      </div>
+      <div class="row profile">
+        <div class="col-md-4">
+          <img class="displayPic" src="images/profilePic.png" />
+          <form method="GET" action="editProfile.html">
+            <button class="edit-profile-btn" type="submit">
+              Edit Profile Picture
+            </button>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <form action="mainPage.html" method="get">
+            <div class="form-group">
+              <label class="textBoxText" for="username">Bio:</label><br />
+              <textarea
+                class="textArea"
+                type="text"
+                name="bio"
+                placeholder="As a passionate LEGO enthusiast, I thrive on the boundless creativity that comes with building brick by brick. From constructing intricate cityscapes to crafting fantastical worlds, my love for LEGO transcends mere hobbyism—it's a lifestyle. Whether meticulously following instructions or daring to forge my own designs, each set I assemble becomes a canvas for imagination. My dedication to the LEGO community extends beyond my personal creations; I revel in sharing tips, techniques, and marveling at the ingenuity of fellow builders. With every new release, I eagerly anticipate the next challenge and opportunity to immerse myself in the colorful, interlocking universe of LEGO."
+              >
+              </textarea
+              ><br />
+
+              <label class="textBoxText" for="username">Location:</label><br />
+              <input
+                class="textBox"
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Pullman, WA"
+                required
+              /><br />
+              <div>
+                <span class="textBoxText">Favorite Categories:</span><br />
+                <input
+                  class="categories"
+                  type="checkbox"
+                  id="q1"
+                  name="q1"
+                  value="q1"
+                />
+                <label for="q1">Lego Star Wars</label><br />
+                <input
+                  class="categories"
+                  type="checkbox"
+                  id="q2"
+                  name="q2"
+                  value="q2"
+                />
+                <label for="q2">Lego Harry Potter</label><br />
+                <input
+                  class="categories"
+                  type="checkbox"
+                  id="q3"
+                  name="q3"
+                  value="q3"
+                />
+                <label for="q3">Lego Ideas</label><br />
+                <input
+                  class="categories"
+                  type="checkbox"
+                  id="q4"
+                  name="q4"
+                  value="q4"
+                />
+                <label for="q4">Lego Ninjago</label><br />
+                <input
+                  class="categories"
+                  type="checkbox"
+                  id="q5"
+                  name="q5"
+                  value="q5"
+                />
+                <label for="q5">Lego Ideas</label><br />
+              </div>
+            </div>
+            <div class="form-group">
+              <input class="textBoxText" type="submit" value="Update Profile" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

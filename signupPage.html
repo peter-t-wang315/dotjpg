@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Profife Page</title>
+    <style>
+      .window {
+        font-size: 12pt;
+        font-family: Arial, sans-serif;
+      }
+      .banner {
+        background-color: grey;
+        padding: 10px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+      }
+      .brick-icon {
+        padding: 0px;
+        max-width: 65x;
+        max-height: 65px;
+      }
+      .title {
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 24pt;
+      }
+      .textBoxText {
+        margin: 10px;
+        margin-left: 20px;
+      }
+      .textBox {
+        width: 400px;
+        margin: 10px;
+        margin-left: 20px;
+      }
+      .login {
+        padding: 30px;
+        padding-top: 50px;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid window">
+      <div class="row banner">
+        <div class="col-md-6">
+          <span class="title">BRICKS FOR US</span>
+          <img class="brick-icon" src="images/brick-icon.png" />
+        </div>
+      </div>
+    </div>
+    <div class="container window">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 login">
+          <h2 class="textBoxText">Sign Up</h2>
+          <form action="mainPage.html" method="get">
+            <div class="form-group">
+              <label class="textBoxText" for="username">Username:</label><br />
+              <input
+                class="textBox"
+                type="text"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="textBoxText" for="username">Email:</label><br />
+              <input
+                class="textBox"
+                type="text"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="textBoxText" for="password">Password:</label><br />
+              <input
+                class="textBox"
+                type="password"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="textBoxText" for="password">Repeat Password:</label
+              ><br />
+              <input
+                class="textBox"
+                type="password"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input class="textBoxText" type="submit" value="Create Account" />
+            </div>
+          </form>
+        </div>
+        <div class="col-md-3 login"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
