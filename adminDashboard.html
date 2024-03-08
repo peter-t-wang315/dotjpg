@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Profife Page</title>
+    <style>
+      .window {
+        font-size: 12pt;
+        font-family: Arial, sans-serif;
+      }
+      .banner {
+        background-color: grey;
+        padding: 10px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+      }
+      .brick-icon {
+        padding: 0px;
+        max-width: 65x;
+        max-height: 65px;
+      }
+      .title {
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 24pt;
+      }
+      .profilePic {
+        max-height: 60px;
+        position: absolute;
+        right: 30px;
+      }
+      .log-out-btn {
+        margin-top: 15px;
+        position: absolute;
+        right: 120px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .textBoxText {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .textBox {
+        width: 250px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .userSearch {
+        padding-top: 50px;
+      }
+      .recentReviews {
+        padding-top: 50px;
+        margin-left: 20px;
+      }
+      .reviews {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .review {
+        display: flex;
+        margin: 10px 0;
+        background-color: #f9f9f9; /* Very light gray background */
+        border: 1px solid #ccc; /* Dark gray border */
+        border-radius: 5px;
+      }
+      .review > p {
+        padding: 10px;
+      }
+      .review-profile {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      .banBtn {
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .flaggedUsers {
+        background-color: #f9f9f9; /* Very light gray background */
+        border: 1px solid #ccc; /* Dark gray border */
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid window">
+      <div class="row banner">
+        <div class="col-md-6">
+          <span class="title">BRICKS FOR US</span>
+          <img class="brick-icon" src="images/brick-icon.png" />
+        </div>
+        <div class="col-md-2">
+          <form method="GET" action="loginPage.html">
+            <button class="log-out-btn" type="submit">Log Out</button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <img class="profilePic" src="images/profilePic.png" />
+        </div>
+      </div>
+    </div>
+    <div class="container window">
+      <div class="row">
+        <div class="col-md-3 userSearch">
+          <h2>Search Users</h2>
+          <form action="mainPage.html" method="get">
+            <div class="form-group">
+              <input
+                class="textBox"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username, Email, or user ID"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input class="textBoxText" type="submit" value="Search" />
+            </div>
+          </form>
+          <br />
+          <h2>Flagged Users</h2>
+          <div class="row flaggedUsers">
+            <h3 class="flaggedUsersText">Username1</h3>
+            <br />
+            <p class="flaggedUsersText">Flags: 20</p>
+            <p>Reviews: 20</p>
+            <form method="GET" action="adminDashboard.html">
+              <button class="banBtn" type="submit">Ban</button>
+            </form>
+          </div>
+          <div class="row flaggedUsers">
+            <h3 class="flaggedUsersText">Username6</h3>
+            <br />
+            <p class="flaggedUsersText">Flags: 10</p>
+            <p>Reviews: 47</p>
+            <form method="GET" action="adminDashboard.html">
+              <button class="banBtn" type="submit">Ban</button>
+            </form>
+          </div>
+          <div class="row flaggedUsers">
+            <h3 class="flaggedUsersText">Username5</h3>
+            <br />
+            <p class="flaggedUsersText">Flags: 5</p>
+            <p>Reviews: 2035</p>
+            <form method="GET" action="adminDashboard.html">
+              <button class="banBtn" type="submit">Ban</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <h2 class="recentReviews">Recent Reviews</h2>
+          <div class="reviews">
+            <div class="review">
+              <div class="review-profile">
+                <h5>Username1</h5>
+                <p>Reviews: 3</p>
+                <p>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+                <form method="GET" action="adminDashboard.html">
+                  <button class="banBtn" type="submit">Flag</button>
+                </form>
+              </div>
+              <p>
+                The LEGO Jungle Raider set offers a thrilling adventure in a
+                compact package. Designed for explorers and adventurers, this
+                set captures the essence of jungle exploration with its detailed
+                features and rugged design. Design & Build The Jungle Raider
+                features a robust design, perfect for navigating through dense
+                foliage and rough terrain. The vehicle is equipped with large,
+                all-terrain wheels, a sturdy roll cage, and a powerful engine,
+                giving it an authentic jungle expedition look. The build is
+                engaging and straightforward, making it suitable for both young
+                and adult LEGO enthusiasts. Minifigures The set includes two
+                minifigures: a brave explorer and a menacing jungle creature.
+                The explorer is equipped with a backpack and a machete, ready to
+                uncover ancient mysteries. The jungle creature adds a thrilling
+                element to the adventure, with its detailed design and posable
+                features. Playability The Jungle Raider is designed for
+                action-packed play. Its rugged construction allows it to tackle
+                any obstacle, from fallen trees to hidden traps. The vehicle's
+                cockpit is accessible, allowing the minifigures to easily hop in
+                and out during their exploration. The set also includes
+                accessories such as a treasure chest and gems, adding to the
+                excitement of the adventure. Overall Overall, the LEGO Jungle
+                Raider set is a fantastic addition to any LEGO collection. Its
+                detailed design, exciting features, and playability make it a
+                must-have for fans of adventure and exploration. Whether you're
+                embarking on a solo expedition or facing off against jungle
+                creatures with friends, the Jungle Raider promises endless hours
+                of imaginative play.
+              </p>
+            </div>
+            <div class="review">
+              <div class="review-profile">
+                <h5>Username2</h5>
+                <p>Reviews: 15209</p>
+                <p>&#x2605;&#x2605;&#x2605;&#x2605;</p>
+                <form method="GET" action="adminDashboard.html">
+                  <button class="banBtn" type="submit">Flag</button>
+                </form>
+              </div>
+              <p>This set was ok I suppose</p>
+            </div>
+            <div class="review">
+              <div class="review-profile">
+                <h5>Username3</h5>
+                <p>Reviews: 1</p>
+                <p>&#x2605;&#x2605;&#x2605;&#x2605;</p>
+                <form method="GET" action="adminDashboard.html">
+                  <button class="banBtn" type="submit">Flag</button>
+                </form>
+              </div>
+              <p>
+                Save ur boring unworthy earth attempted time savings. Buy urself
+                train tickets
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
