@@ -12,21 +12,49 @@
     />
     <title>Review Page</title>
     <style>
+      .window {
+        font-size: 12pt;
+        font-family: Arial, sans-serif;
+      }
       .banner {
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
+        background-color: grey;
+        padding: 10px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
       }
       .brick-icon {
-        max-width: 75x;
-        max-height: 75px;
+        padding: 0px;
+        max-width: 65x;
+        max-height: 65px;
+      }
+      .profilePic {
+        max-height: 60px;
+        position: absolute;
+        right: 30px;
+      }
+      .log-out-btn {
+        margin-top: 15px;
+        position: absolute;
+        right: 120px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .title {
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 24pt;
       }
       .content {
         display: flex;
         /* justify-content: center; */
         align-items: center;
         flex-direction: column;
-        margin-top: -40px;
+        margin-top: 40px;
       }
       .review-image {
         max-width: 600px;
@@ -73,9 +101,21 @@
     </style>
   </head>
   <body>
-    <div class="banner">
-      <h2 style="padding: 0 10px; font-weight: bold">BRICKS FOR US</h2>
-      <img class="brick-icon" src="images/brick-icon.png" />
+    <div class="container-fluid window">
+      <div class="row banner">
+        <div class="col-md-6">
+          <span class="title">BRICKS FOR US</span>
+          <img class="brick-icon" src="images/brick-icon.png" />
+        </div>
+        <div class="col-md-2">
+          <form method="GET" action="loginPage.html">
+            <button class="log-out-btn" type="submit">Log Out</button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <img class="profilePic" src="images/profilePic.png" />
+        </div>
+      </div>
     </div>
     <div class="content">
       <div class="top-content">
