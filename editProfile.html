@@ -48,8 +48,9 @@
         cursor: pointer;
         font-size: 16px;
       }
-      .edit-profile-btn {
+      .btn {
         margin-top: 20px;
+        margin-left: 15px;
         padding: 10px 20px;
         background-color: red;
         color: white;
@@ -115,14 +116,31 @@
         <div class="col-md-4">
           <img class="displayPic" src="images/profilePic.png" />
           <form method="GET" action="editProfile.html">
-            <button class="edit-profile-btn" type="submit">
-              Edit Profile Picture
-            </button>
+            <button class="btn" type="submit">Edit Profile Picture</button>
           </form>
         </div>
         <div class="col-md-8">
           <form action="mainPage.html" method="get">
             <div class="form-group">
+              <label class="textBoxText" for="firstname">First Name:</label
+              ><br />
+              <input
+                class="textBox"
+                type="text"
+                id="firstname"
+                name="firstname"
+                placeholder="John"
+                required
+              /><br />
+              <label class="textBoxText" for="lastname">Last Name:</label><br />
+              <input
+                class="textBox"
+                type="text"
+                id="lastname"
+                name="lastname"
+                placeholder="Yates"
+                required
+              /><br />
               <label class="textBoxText" for="username">Bio:</label><br />
               <textarea
                 class="textArea"
@@ -141,7 +159,7 @@
                 name="location"
                 placeholder="Pullman, WA"
                 required
-              /><br />
+              /><br /><br />
               <div>
                 <span class="textBoxText">Favorite Categories:</span><br />
                 <input
@@ -187,7 +205,7 @@
               </div>
             </div>
             <div class="form-group">
-              <input class="textBoxText" type="submit" value="Update Profile" />
+              <input class="btn" type="submit" value="Update Profile" />
             </div>
           </form>
         </div>
