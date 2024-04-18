@@ -1,13 +1,14 @@
 "use client";
+import MainSetDisplay from "@/components/MainSetDisplay";
 import { useState } from "react";
 
 const defaultSets = [
-  ["Trafalgar Square", "images/lego-set1.png"],
-  ["City Block", "images/lego-set2.png"],
-  ["Heavy Cargo Transport", "images/lego-set3.png"],
-  ["Bengal Tiger", "images/lego-set4.png"],
-  ["Police Station", "images/lego-set5.png"],
-  ["Jungle Raider", "images/lego-set6.png"],
+  ["Trafalgar Square", "/images/lego-set1.jpg"],
+  ["City Block", "/images/lego-set2.jpg"],
+  ["Heavy Cargo Transport", "/images/lego-set3.jpg"],
+  ["Bengal Tiger", "/images/lego-set4.jpg"],
+  ["Police Station", "/images/lego-set5.jpg"],
+  ["Jungle Raider", "/images/lego-set6.jpg"],
 ];
 
 export default function Home() {
@@ -24,34 +25,11 @@ export default function Home() {
         />
         <button className="btn-primary">Submit</button>
       </div>
-      <div className="grid grid-cols-3">
-        <h3>Check out our most frequently visited Lego sets</h3>
-        <div className="set-grid">
-          <div className="set-card">
-            <img className="set-img" src="images/lego-set1.png" />
-            <p className="set-caption">Trafalgar Square</p>
-          </div>
-          <div className="set-card">
-            <img className="set-img" src="images/lego-set2.jpg" />
-            <p className="set-caption">City Block</p>
-          </div>
-          <div className="set-card">
-            <img className="set-img" src="images/lego-set3.jpg" />
-            <p className="set-caption">Heavy Cargo Transport</p>
-          </div>
-          <div className="set-card">
-            <img className="set-img" src="images/lego-set4.jpg" />
-            <p className="set-caption">Bengal Tiger</p>
-          </div>
-          <div className="set-card">
-            <img className="set-img" src="images/lego-set5.jpg" />
-            <p className="set-caption">Police Station</p>
-          </div>
-          <div className="set-card">
-            <img className="set-img" src="images/lego-set6.jpg" />
-            <p className="set-caption">Jungle Raider</p>
-          </div>
-        </div>
+      <h3>Check out our most frequently visited Lego sets</h3>
+      <div className="grid grid-cols-3 w-full gap-5">
+        {legoSets?.map((set, index) => (
+          <MainSetDisplay key={index} image={set[1]} title={set[0]} />
+        ))}
       </div>
     </>
   );
