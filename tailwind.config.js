@@ -18,7 +18,9 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        "background-darker": "var(--background-darker)",
         border: "var(--border)",
+        "border-darker": "var(--border-darker)",
       },
     },
   },
@@ -26,8 +28,10 @@ module.exports = {
     plugin(function ({ addBase, theme }) {
       addBase({
         h1: { fontSize: theme("fontSize.3xl"), fontWeight: 600 },
-        h2: { fontSize: theme("fontSize.2xl") },
-        h3: { fontSize: theme("fontSize.lg") },
+        h2: { fontSize: theme("fontSize.3xl") },
+        h3: { fontSize: theme("fontSize.2xl") },
+        h4: { fontSize: theme("fontSize.xl") },
+        h5: { fontSize: theme("fontSize.lg") },
       });
     }),
   ],

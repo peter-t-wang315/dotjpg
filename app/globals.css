@@ -4,9 +4,11 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: #fff;
+  --background-end-rgb: #fff;
+  --background-darker: #ccc;
   --border: #ccc;
+  --border-darker: #979797;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -35,7 +37,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-1 bg-red-500 text-white rounded-xl;
+    @apply px-4 py-1 bg-red-500 text-white rounded-xl hover:bg-red-800;
   }
   .input-primary {
     @apply p-3 border rounded-lg border-border;
