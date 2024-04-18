@@ -25,10 +25,8 @@ export default function Home() {
         />
         <button className="btn-primary">Submit</button>
       </div>
-      <div className="grid grid-cols-3 w-full gap-10">
-        <h3 className="col-span-3">
-          Check out our most frequently visited Lego sets
-        </h3>
+      <h3>Check out our most frequently visited Lego sets</h3>
+      <div className="grid grid-cols-3 w-full gap-5">
         {legoSets?.map((set, index) => (
           <MainSetDisplay key={index} image={set[1]} title={set[0]} />
         ))}
