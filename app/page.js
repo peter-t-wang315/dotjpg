@@ -2,17 +2,8 @@
 import MainSetDisplay from "@/components/MainSetDisplay";
 import { useEffect, useState } from "react";
 
-const defaultSets = [
-  ["Trafalgar Square", "/images/lego-set1.jpg"],
-  ["City Block", "/images/lego-set2.jpg"],
-  ["Heavy Cargo Transport", "/images/lego-set3.jpg"],
-  ["Bengal Tiger", "/images/lego-set4.jpg"],
-  ["Police Station", "/images/lego-set5.jpg"],
-  ["Jungle Raider", "/images/lego-set6.jpg"],
-];
-
 export default function Home() {
-  const [legoSets, setLegoSets] = useState(defaultSets);
+  const [legoSets, setLegoSets] = useState([]);
 
   useEffect(() => {
     const getPopularSets = async () => {
@@ -50,7 +41,7 @@ export default function Home() {
       <h3>Check out our most frequently visited Lego sets</h3>
       <div className="grid grid-cols-3 w-full gap-5">
         {legoSets?.map((set, index) => (
-          <MainSetDisplay key={index} image={set[1]} title={set[0]} />
+          <MainSetDisplay key={index} image={set.image} title={set.name} brick_count={set.brick_count} year={set.year} />
         ))}
       </div>
     </>
