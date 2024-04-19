@@ -4,12 +4,6 @@ import SetReviewBlock from "@/components/SetReviewBlock";
 import RatingStars from "@/components/RatingStars";
 import { useEffect, useState } from "react";
 
-const setImage = "/images/lego-set1.jpg";
-
-const pieceCount = "Piece Count";
-
-const rating = 4;
-
 const reviews = [
   {
     username: "Username 1",
@@ -34,10 +28,11 @@ const reviews = [
 ];
 
 export default function Index({ params }) {
-  const legoSetID = Number(params);
+  const legoSetID = Number(params.setID);
   const [setName, setSetName] = useState("");
   const [setImage, setSetImage] = useState("");
   const [pieceCount, setPieceCount] = useState("");
+  const [year, setYear] = useState("");
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
@@ -45,7 +40,7 @@ export default function Index({ params }) {
       const currentURL = window.location.origin;
       try {
         const response = await fetch(
-          `${currentURL}/api/legosets/byID?id=${legoSetID}`,
+          `${currentURL}/api/legosets/byID?id=${encodeURIComponent(legoSetID)}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -53,7 +48,10 @@ export default function Index({ params }) {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log("Data", data);
+          setSetName(data.name);
+          setPieceCount(data.numParts);
+          setYear(data.year);
+          setSetImage(`data:image/jpeg;base64,${data.image}`);
         } else {
           console.error("Failed to fetch data:", response.statusText);
         }
@@ -71,11 +69,14 @@ export default function Index({ params }) {
         <h1>{setName}</h1>
         <Image src={setImage} width={375} height={375} alt={`Image`} />
         <div className="flex justify-between w-full mt-6">
-          <div className="flex flex-col gap-5">
-            <p>{pieceCount}</p>
-            <RatingStars numStars={rating} />
+          <div className="flex flex-col gap-5 w-full">
+            <p>Piece Count: {pieceCount}</p>
+            <p>Year: {year}</p>
           </div>
-          <button className="btn-primary self-end">Review Set</button>
+          <div className="flex justify-between w-full mt-6">
+            <RatingStars numStars={rating} />
+            <button className="btn-primary self-end">Review Set</button>
+          </div>
         </div>
       </div>
       {reviews?.map((review, index) => (

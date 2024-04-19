@@ -23,7 +23,7 @@ export default function MainSetDisplay({
         push(`review/${id}`);
       }}
     >
-      <Image src={imageLink} width={300} height={250} alt={`${title} Image`} />
+      <Image src={imageLink} width={200} height={200} alt={`${title} Image`} />
       <div className="flex flex-col justify-between">
         <h4 className="font-medium">{title}</h4>
         <div>

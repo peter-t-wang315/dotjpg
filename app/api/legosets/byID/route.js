@@ -10,7 +10,17 @@ export async function GET(req) {
     where: {
       id: legoSetId,
     },
+    include: {
+      Image: { select: { image: true } },
+    },
   });
 
-  return NextResponse.json(set, { status: 200 });
+  return NextResponse.json(
+    {
+      ...set,
+      image: set?.Image.image.toString("utf8") ?? "",
+      Image: undefined,
+    },
+    { status: 200 }
+  );
 }
