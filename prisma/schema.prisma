@@ -11,9 +11,30 @@ datasource db {
 }
 
 model Legoset {
-	id				Int	@id @default(autoincrement())
-	name			String
-	numParts	Int
-	year			Int
-	imgUrl		String
+  id       Int      @id @default(autoincrement())
+  name     String
+  numParts Int
+  year     Int
+  imgUrl   String
+  Review   Review[]
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  bio      String
+  password String
+	email		 String @unique
+  Review   Review[]
+}
+
+model Review {
+  review    String
+  stars     Int
+  userID    Int
+  legosetID Int
+  user      User    @relation(fields: [userID], references: id)
+  legoset   Legoset @relation(fields: [legosetID], references: id)
+
+  @@id([userID, legosetID])
 }
