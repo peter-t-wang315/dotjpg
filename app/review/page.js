@@ -5,6 +5,10 @@ const setName = "Jungle Raider";
 
 const setImage = "/images/lego-set1.jpg";
 
+const pieceCount = "Piece Count";
+
+const rating = "Rating";
+
 const reviews = [
   {
     username: "Username 1",
@@ -36,8 +40,8 @@ export default function Index() {
         <Image src={setImage} width={375} height={375} alt={`Image`} />
         <div className="flex justify-between w-full mt-6">
           <div className="flex flex-col gap-5">
-            <p>Piece count</p>
-            <p>Rating</p>
+            <p>{pieceCount}</p>
+            <p>{rating}</p>
           </div>
           <button className="btn-primary self-end">Review Set</button>
         </div>

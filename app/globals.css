@@ -42,4 +42,7 @@ body {
   .input-primary {
     @apply p-3 border rounded-lg border-border;
   }
+  .textarea-primary {
+    @apply p-3 border rounded-lg border-border;
+  }
 }
