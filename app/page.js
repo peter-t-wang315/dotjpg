@@ -14,6 +14,12 @@ const defaultSets = [
 export default function Home() {
   const [legoSets, setLegoSets] = useState(defaultSets);
 
+  //Add check to see if valid user
+
+  //If not valid user, redirect to login page
+
+  //Else display menu
+
   return (
     <>
       <div className="flex flex-col items-center justify-center pb-7 w-full gap-3">
