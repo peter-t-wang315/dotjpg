@@ -14,6 +14,20 @@ export async function GET(req) {
         },
       },
     },
+    include: {
+      Image: {
+        select: {
+          image: true
+        }
+      }
+    }
   });
-  return NextResponse.json(topSets, { status: 200 }); // TODO: Add avg review as a float for the front end
+  // This is suuuuuper hackey but idk what other options exist
+  const results = topSets.map(x => {
+    x.image = x.Image?.image.toString("utf8") ?? "";
+    x.Image = undefined;
+    return x;
+  });
+
+  return NextResponse.json(results, { status: 200 }); // TODO: Add avg review as a float for the front end
 }
