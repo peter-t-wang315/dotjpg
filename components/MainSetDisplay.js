@@ -3,7 +3,7 @@ import RatingStars from "./RatingStars";
 
 const rating = 4;
 
-export default function MainSetDisplay({ image, title }) {
+export default function MainSetDisplay({ image, title, brick_count, year }) {
   return (
     <div
       className="col-span-1 w-full flex gap-5 card-clickable flex-row"
@@ -16,8 +16,8 @@ export default function MainSetDisplay({ image, title }) {
         <h4 className="font-medium">{title}</h4>
         <div>
           <RatingStars numStars={rating} />
-          <p>Cost: ?</p>
-          <p>Brick Count: ?</p>
+          <p>Brick Count: {brick_count}</p>
+          <p>Year: {year}</p>
         </div>
       </div>
     </div>
