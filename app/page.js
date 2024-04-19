@@ -1,10 +1,12 @@
 "use client";
 import MainSetDisplay from "@/components/MainSetDisplay";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [legoSets, setLegoSets] = useState([]);
   const [initialSets, setInitialSets] = useState([]);
+  const { push } = useRouter();
 
   const submitLegoSetSearch = async (searchQuery) => {
     const currentURL = window.location.origin;
@@ -74,11 +76,13 @@ export default function Home() {
       <div className="grid grid-cols-3 w-full gap-5">
         {legoSets?.map((set, index) => (
           <MainSetDisplay
+            id={set.id}
             key={index}
             image={set.image}
             title={set.name}
-            brick_count={set.brick_count}
+            brick_count={set.numParts}
             year={set.year}
+            push={push}
           />
         ))}
       </div>

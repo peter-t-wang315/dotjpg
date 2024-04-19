@@ -3,12 +3,19 @@ import RatingStars from "./RatingStars";
 
 const rating = 4;
 
-export default function MainSetDisplay({ image, title, brick_count, year }) {
+export default function MainSetDisplay({
+  id,
+  image,
+  title,
+  brick_count,
+  year,
+  push,
+}) {
   return (
     <div
       className="col-span-1 w-full flex gap-5 card-clickable flex-row"
       onClick={() => {
-        console.log("This is doing something");
+        push(`review/${id}`);
       }}
     >
       <Image src={image} width={200} height={200} alt={`${title} Image`} />

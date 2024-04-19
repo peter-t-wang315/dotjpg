@@ -1,8 +1,8 @@
+"use client";
 import Image from "next/image";
 import SetReviewBlock from "@/components/SetReviewBlock";
 import RatingStars from "@/components/RatingStars";
-
-const setName = "Jungle Raider";
+import { useEffect, useState } from "react";
 
 const setImage = "/images/lego-set1.jpg";
 
@@ -33,7 +33,38 @@ const reviews = [
   },
 ];
 
-export default function Index() {
+export default function Index({ params }) {
+  const legoSetID = Number(params);
+  const [setName, setSetName] = useState("");
+  const [setImage, setSetImage] = useState("");
+  const [pieceCount, setPieceCount] = useState("");
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    const getSetData = async () => {
+      const currentURL = window.location.origin;
+      try {
+        const response = await fetch(
+          `${currentURL}/api/legosets/byID?id=${legoSetID}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Data", data);
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    getSetData();
+  }, []);
+
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="flex flex-col items-center border border-black rounded-lg p-4 mb-2">
