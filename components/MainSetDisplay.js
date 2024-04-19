@@ -6,7 +6,7 @@ const rating = 4;
 export default function MainSetDisplay({ image, title }) {
   return (
     <div
-      className="col-span-1 w-full flex gap-5 border border-border rounded-xl p-5 hover:border-border-darker hover:bg-background-darker hover:cursor-pointer"
+      className="col-span-1 w-full flex gap-5 card-clickable flex-row"
       onClick={() => {
         console.log("This is doing something");
       }}
