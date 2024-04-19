@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-10 w-full gap-3">
+      <div className="flex flex-col items-center justify-center pb-7 w-full gap-3">
         <h2>Search for a Lego set</h2>
         <input
           className="input-primary w-1/3"
