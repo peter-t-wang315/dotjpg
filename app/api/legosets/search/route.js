@@ -11,6 +11,21 @@ export async function GET(req) {
         contains: param, // This search is case insensitive, we need to modify the schema to change that
       },
     },
-  }); // fix this later to sort by popularity
-  return NextResponse.json(matchingSets, { status: 200 });
+    include: {
+      Image: {
+        select: {
+          image: true
+        }
+      }
+    }
+  }); 
+
+    // This is suuuuuper hackey but idk what other options exist
+  const results = matchingSets.map(x => {
+    x.image = x.Image?.image.toString("utf8") ?? "";
+    x.Image = undefined;
+    return x;
+  });
+
+  return NextResponse.json(results, { status: 200 });
 }
