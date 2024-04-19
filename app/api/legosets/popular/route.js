@@ -15,5 +15,5 @@ export async function GET(req) {
       },
     },
   });
-  return NextResponse.json(topSets, { status: 200 });
+  return NextResponse.json(topSets, { status: 200 }); // TODO: Add avg review as a float for the front end
 }
