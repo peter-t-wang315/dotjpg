@@ -1,6 +1,6 @@
 "use client";
 import MainSetDisplay from "@/components/MainSetDisplay";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const defaultSets = [
   ["Trafalgar Square", "/images/lego-set1.jpg"],
@@ -14,6 +14,28 @@ const defaultSets = [
 export default function Home() {
   const [legoSets, setLegoSets] = useState(defaultSets);
 
+  useEffect(() => {
+    const getPopularSets = async () => {
+      const currentURL = window.location.origin;
+      try {
+        const response = await fetch(`${currentURL}/api/legosets/popular`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Data", data);
+          setLegoSets(data);
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    getPopularSets();
+  }, []);
   return (
     <>
       <div className="flex flex-col items-center justify-center pb-7 w-full gap-3">
