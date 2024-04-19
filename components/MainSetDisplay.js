@@ -8,7 +8,7 @@ export default function MainSetDisplay({ image, title }) {
         console.log("This is doing something");
       }}
     >
-      <Image src={image} width={200} height={200} />
+      <Image src={image} width={200} height={200} alt={`${title} Image`} />
       <div className="flex flex-col justify-between">
         <h4 className="font-medium">{title}</h4>
         <div>
