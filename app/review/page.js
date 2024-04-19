@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SetReviewBlock from "@/components/SetReviewBlock";
+import RatingStars from "@/components/RatingStars";
 
 const setName = "Jungle Raider";
 
@@ -7,7 +8,7 @@ const setImage = "/images/lego-set1.jpg";
 
 const pieceCount = "Piece Count";
 
-const rating = "Rating";
+const rating = 4;
 
 const reviews = [
   {
@@ -41,7 +42,7 @@ export default function Index() {
         <div className="flex justify-between w-full mt-6">
           <div className="flex flex-col gap-5">
             <p>{pieceCount}</p>
-            <p>{rating}</p>
+            <RatingStars numStars={rating} />
           </div>
           <button className="btn-primary self-end">Review Set</button>
         </div>
