@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: #fff;
   --background-end-rgb: #fff;
+  --background: #f9f9f9;
   --background-darker: #ccc;
   --border: #ccc;
   --border-darker: #979797;
@@ -44,5 +45,11 @@ body {
   }
   .textarea-primary {
     @apply p-3 border rounded-lg border-border;
+  }
+  .card-primary {
+    @apply flex flex-col border border-border rounded-lg bg-background p-3;
+  }
+  .card-clickable {
+    @apply flex flex-col border border-border rounded-lg bg-background p-3 hover:border-border-darker hover:bg-background-darker hover:cursor-pointer;
   }
 }

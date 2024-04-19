@@ -1,3 +1,4 @@
+import RatingStars from "@/components/RatingStars";
 import Image from "next/image";
 
 const setName = "Jungle Raider";
@@ -6,7 +7,7 @@ const setImage = "/images/lego-set1.jpg";
 
 const pieceCount = "Piece Count";
 
-const rating = "Rating";
+const rating = 4;
 
 export default function Index() {
   return (
@@ -16,7 +17,7 @@ export default function Index() {
         <Image src={setImage} width={375} height={375} alt={`Image`} />
         <div className="flex justify-between w-full mt-7">
           <p>{pieceCount}</p>
-          <p>{rating}</p>
+          <RatingStars numStars={rating} />
         </div>
       </div>
       <div className="flex flex-col w-3/4 font-medium">
