@@ -42,7 +42,7 @@ export default function Index({ params }) {
       const currentURL = window.location.origin;
       try {
         const response = await fetch(
-          `${currentURL}/api/legosets/byID?id=${encodeURIComponent(legoSetID)}`,
+          `${currentURL}/api/legosets?id=${encodeURIComponent(legoSetID)}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
