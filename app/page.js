@@ -82,6 +82,7 @@ export default function Home() {
             title={set.name}
             brick_count={set.numParts}
             year={set.year}
+            rating={Math.round(set.averageReviewStars)}
             push={push}
           />
         ))}
