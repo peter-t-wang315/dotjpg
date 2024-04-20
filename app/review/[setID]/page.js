@@ -92,9 +92,9 @@ export default function Index({ params }) {
       </div>
       {reviews?.map((review, index) => (
         <SetReviewBlock
-          username={review.username}
+          username={review.reviewer}
           numReviews={review.numReviews}
-          rating={review.rating}
+          rating={review.stars}
           review={review.review}
         />
       ))}

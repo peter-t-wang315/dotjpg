@@ -12,9 +12,22 @@ export async function GET(req) {
     where: {
       legosetID: legoSetID,
     },
+    include: {
+      user: {
+        select: {
+          name: true
+        }
+      }
+    }
   });
 
-  return NextResponse.json(matchingReviews, { status: 200 });
+  const result = matchingReviews.map(x => {
+    x.reviewer = x.user.name;
+    x.user = undefined;
+    return x;
+  });
+
+  return NextResponse.json(result, { status: 200 });
 }
 
 // endpoint for making a new review
