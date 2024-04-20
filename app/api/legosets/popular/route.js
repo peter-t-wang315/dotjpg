@@ -17,13 +17,13 @@ export async function GET(req) {
     include: {
       Image: {
         select: {
-          image: true
-        }
-      }
-    }
+          image: true,
+        },
+      },
+    },
   });
   // This is suuuuuper hackey but idk what other options exist
-  const results = topSets.map(x => {
+  const results = topSets.map((x) => {
     x.image = x.Image?.image.toString("utf8") ?? "";
     x.Image = undefined;
     return x;

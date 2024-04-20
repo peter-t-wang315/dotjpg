@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/lib/prisma";
 
 // gets reviews for a provided lego set id
 export async function GET(req) {
@@ -9,10 +9,10 @@ export async function GET(req) {
 
   const matchingReviews = await prisma.Review.findMany({
     where: {
-      legosetID: legoSetID
+      legosetID: legoSetID,
     },
-  }); 
- 
+  });
+
   return NextResponse.json(matchingReviews, { status: 200 });
 }
 
@@ -25,8 +25,8 @@ export async function POST(req) {
       review: review,
       stars: stars,
       userID: userID,
-      legosetID: legosetID
-    }
+      legosetID: legosetID,
+    },
   });
 
   return NextResponse.json(newReview, { status: 200 });
