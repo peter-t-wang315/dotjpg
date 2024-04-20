@@ -3,6 +3,7 @@ import Image from "next/image";
 import SetReviewBlock from "@/components/SetReviewBlock";
 import RatingStars from "@/components/RatingStars";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const reviews = [
   {
@@ -34,6 +35,7 @@ export default function Index({ params }) {
   const [pieceCount, setPieceCount] = useState("");
   const [year, setYear] = useState("");
   const [rating, setRating] = useState(0);
+  const { push } = useRouter();
 
   useEffect(() => {
     const getSetData = async () => {
@@ -75,7 +77,14 @@ export default function Index({ params }) {
           </div>
           <div className="flex justify-between w-full mt-6">
             <RatingStars numStars={rating} />
-            <button className="btn-primary self-end">Review Set</button>
+            <button
+              className="btn-primary self-end"
+              onClick={() => {
+                push(`/createReview/${legoSetID}`);
+              }}
+            >
+              Review Set
+            </button>
           </div>
         </div>
       </div>
