@@ -17,6 +17,14 @@ model Legoset {
   year     Int
   imgUrl   String
   Review   Review[]
+  Image    LegosetImage?
+}
+
+model LegosetImage {
+  legosetID Int
+  legoset        Legoset @relation(fields: legosetID, references: id)
+  image          Bytes
+  @@id([legosetID])
 }
 
 model User {

@@ -37,3 +37,7 @@ next-env.d.ts
 
 .next/
 package-lock.json
+prisma/legosets.db
+
+venv/
+prisma/legosets.db

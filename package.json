@@ -15,7 +15,9 @@
     "prisma": "^5.12.1",
     "react": "^18",
     "react-dom": "^18",
-    "sqlite3": "^5.1.7"
+    "react-toastify": "^10.0.5",
+    "sqlite3": "^5.1.7",
+    "toast": "^0.5.4"
   },
   "devDependencies": {
     "@types/node": "20.12.7",
