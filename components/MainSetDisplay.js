@@ -1,14 +1,13 @@
 import Image from "next/image";
 import RatingStars from "./RatingStars";
 
-const rating = 4;
-
 export default function MainSetDisplay({
   id,
   image,
   title,
   brick_count,
   year,
+  rating,
   push,
 }) {
   let imageLink = "";

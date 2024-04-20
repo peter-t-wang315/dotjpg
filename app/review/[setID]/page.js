@@ -4,29 +4,8 @@ import SetReviewBlock from "@/components/SetReviewBlock";
 import RatingStars from "@/components/RatingStars";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const reviews = [
-  {
-    username: "Username 1",
-    numReviews: 3,
-    rating: 5,
-    review:
-      "The LEGO Jungle Raider set offers a thrilling adventure in a compact package. Designed for explorers and adventurers, this set captures the essence of jungle exploration with its detailed features and rugged design. Design & Build The Jungle Raider features a robust design, perfect for navigating through dense foliage and rough terrain. The vehicle is equipped with large, all-terrain wheels, a sturdy roll cage, and a powerful engine, giving it an authentic jungle expedition look. The build is engaging and straightforward, making it suitable for both young and adult LEGO enthusiasts. Minifigures The set includes two minifigures: a brave explorer and a menacing jungle creature. The explorer is equipped with a backpack and a machete, ready to uncover ancient mysteries. The jungle creature adds a thrilling element to the adventure, with its detailed design and posable features. Playability The Jungle Raider is designed for action-packed play. Its rugged construction allows it to tackle any obstacle, from fallen trees to hidden traps. The vehicle's cockpit is accessible, allowing the minifigures to easily hop in and out during their exploration. The set also includes accessories such as a treasure chest and gems, adding to the excitement of the adventure. Overall Overall, the LEGO Jungle Raider set is a fantastic addition to any LEGO collection. Its detailed design, exciting features, and playability make it a must-have for fans of adventure and exploration. Whether you're embarking on a solo expedition or facing off against jungle creatures with friends, the Jungle Raider promises endless hours of imaginative play.",
-  },
-  {
-    username: "Username 2",
-    numReviews: 15209,
-    rating: 4,
-    review: "This set was ok I suppose",
-  },
-  {
-    username: "Username 3",
-    numReviews: 1,
-    rating: 1,
-    review:
-      "Save ur boring unworthy earth attempted time savings. Buy urself train tickets",
-  },
-];
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Index({ params }) {
   const legoSetID = Number(params.setID);
@@ -35,6 +14,7 @@ export default function Index({ params }) {
   const [pieceCount, setPieceCount] = useState("");
   const [year, setYear] = useState("");
   const [rating, setRating] = useState(0);
+  const [reviews, setReviews] = useState([]);
   const { push } = useRouter();
 
   useEffect(() => {
@@ -55,14 +35,36 @@ export default function Index({ params }) {
           setYear(data.year);
           setSetImage(`data:image/jpeg;base64,${data.image}`);
         } else {
-          console.error("Failed to fetch data:", response.statusText);
+          toast.error(`Failed to fetch data: ${response.statusText}`, {position: bottom-left});
         }
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        toast.error(`Error fetching data: ${error}`, {position: bottom-left});
       }
     };
 
+    const getSetReviews = async () => {
+      const currentURL = window.location.origin;
+      try {
+        const response = await fetch(
+          `${currentURL}/api/reviews?id=${encodeURIComponent(legoSetID)}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setReviews(data);
+        } else {
+          toast.error(`Failed to fetch data: ${response.statusText}`, {position: bottom-left});
+        }
+      } catch (error) {
+        toast.error(`Error fetching data: ${error}`, {position: bottom-left});
+      }
+    }
+
     getSetData();
+    getSetReviews();
   }, []);
 
   return (
@@ -96,6 +98,7 @@ export default function Index({ params }) {
           review={review.review}
         />
       ))}
+      <ToastContainer/>
     </div>
   );
 }
