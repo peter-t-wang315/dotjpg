@@ -13,11 +13,13 @@ export async function GET(req) {
           contains: param, // This search is case insensitive, we need to modify the schema to change that
         },
       },
-      Review: {
-          select: {
-            stars: true,
-          }
-        },
+      include: {
+        Review: {
+            select: {
+              stars: true,
+            }
+        }
+      },
       include: {
         Image: {
           select: {
@@ -29,7 +31,10 @@ export async function GET(req) {
 
       // This is suuuuuper hackey but idk what other options exist
     const results = matchingSets.map(x => {
-      x.averageReviewStars = x.Review.reduce((acc, x) => acc + x.stars, 0) / x.Review.length;
+      x.averageReviewStars = 0;
+      if(x.Review?.length ?? 0 > 0) {
+        x.averageReviewStars = x.Review?.reduce((acc, x) => acc + x.stars, 0) / x.Review.length ?? 0;
+      }
       x.Review = undefined;
       x.image = x.Image?.image.toString("utf8") ?? "";
       x.Image = undefined;

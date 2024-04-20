@@ -90,14 +90,16 @@ export default function Index({ params }) {
           </div>
         </div>
       </div>
-      {reviews?.map((review, index) => (
+      {reviews?.length ?? 0 > 0 ? reviews.map((review, index) => (
         <SetReviewBlock
           username={review.reviewer}
           numReviews={review.numReviews}
           rating={review.stars}
           review={review.review}
         />
-      ))}
+        )) : 
+        <p>No Reviews for this set</p>
+      }
       <ToastContainer/>
     </div>
   );
