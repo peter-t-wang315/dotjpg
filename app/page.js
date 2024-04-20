@@ -58,6 +58,12 @@ export default function Home() {
     getPopularSets();
   }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
 
+  //Add check to see if valid user
+
+  //If not valid user, redirect to login page
+
+  //Else display menu
+
   return (
     <>
       <div className="flex flex-col items-center justify-center pb-7 w-full gap-3">
