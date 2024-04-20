@@ -45,7 +45,6 @@ export default function Home() {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("Home page data", data);
           setLegoSets(data);
           setInitialSets(data);
         } else {
