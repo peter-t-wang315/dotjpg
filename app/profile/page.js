@@ -19,34 +19,8 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    const fetchState = async () => {
-      const currentURL = window.location.origin;
-      try {
-        const response = await fetch(
-          `${currentURL}/api/users/reviews?userID=${encodeURIComponent(
-            parseInt(session?.id)
-          )}`, // TODO: use session?
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data.user);
-          setBio(data.bio);
-          setIsAdmin(data.isAdmin);
-          setReviews(data.reviews);
-        } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`);
-        }
-      } catch (error) {
-        toast.error(`Error fetching data: ${error}`);
-      }
-    };
-
+    let userID;
     const session_id = sessionStorage.getItem("id");
-    console.log("session", session_id);
     if (!session_id) {
       window.location.href = "/login";
     } else {
@@ -61,11 +35,38 @@ export default function Index() {
         if (response.ok) {
           const data = await response.json();
           setSession(data); // Update session state
+          userID = data.id;
           if (session?.isAdmin === false) {
             window.location.href = "/";
           }
         }
         setIsLoading(false); // Update loading state
+      };
+
+      const fetchState = async () => {
+        const currentURL = window.location.origin;
+        try {
+          const response = await fetch(
+            `${currentURL}/api/users/reviews?userID=${encodeURIComponent(
+              parseInt(userID)
+            )}`, // TODO: use session?
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setUser(data.user);
+            setBio(data.bio);
+            setIsAdmin(data.isAdmin);
+            setReviews(data.reviews);
+          } else {
+            toast.error(`Failed to fetch data: ${response.statusText}`);
+          }
+        } catch (error) {
+          toast.error(`Error fetching data: ${error}`);
+        }
       };
 
       getSessionData(session_id);

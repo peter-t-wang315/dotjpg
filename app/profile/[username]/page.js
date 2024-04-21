@@ -109,6 +109,7 @@ export default function Index({ params }) {
         const data = await response.json();
 
         toast.success(`Successfully deleted ${username}`);
+        push("/");
       } else {
         toast.error(`Failed to delete ${username}'s review`);
       }

@@ -37,7 +37,7 @@ export default function Index({ params }) {
           setSetName(data.name);
           setPieceCount(data.numParts);
           setYear(data.year);
-          setRating(data.averageReviewStars);
+          setRating(Math.floor(data.averageReviewStars));
           setSetImage(`data:image/jpeg;base64,${data?.image}`);
         } else {
           toast.error(`Failed to fetch data: ${response.statusText}`);

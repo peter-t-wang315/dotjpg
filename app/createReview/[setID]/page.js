@@ -114,7 +114,12 @@ export default function Index({ params }) {
 
   return (
     <div className="flex gap-10">
-      <div className="flex flex-col w-1/4 border border-black rounded-lg p-5 items-center">
+      <div
+        className=" card-clickable w-1/4 p-5 items-center"
+        onClick={() => {
+          push(`/review/${legoSetID}`);
+        }}
+      >
         <h2>{setName}</h2>
         <Image src={setImage} width={375} height={375} alt={`Image`} />
         <div className="flex justify-between w-full mt-7">
