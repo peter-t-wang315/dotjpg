@@ -12,14 +12,20 @@ export async function GET(req) {
     },
     include: {
       Image: { select: { image: true } },
+      Review: { select: { stars: true } },
     },
   });
+
+  const averageStars =
+    set.Review.reduce((acc, review) => acc + review.stars, 0) /
+    set.Review.length;
 
   return NextResponse.json(
     {
       ...set,
       image: set?.Image?.image.toString("utf8") ?? "",
       Image: undefined,
+      averageReviewStars: averageStars,
     },
     { status: 200 }
   );

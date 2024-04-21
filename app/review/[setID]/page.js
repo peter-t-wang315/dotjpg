@@ -35,6 +35,7 @@ export default function Index({ params }) {
           setSetName(data.name);
           setPieceCount(data.numParts);
           setYear(data.year);
+          setRating(data.averageReviewStars);
           setSetImage(`data:image/jpeg;base64,${data?.image}`);
         } else {
           toast.error(`Failed to fetch data: ${response.statusText}`);
@@ -57,7 +58,6 @@ export default function Index({ params }) {
         if (response.ok) {
           const data = await response.json();
           setReviews(data);
-          console.log(data);
         } else {
           toast.error(`Failed to fetch data: ${response.statusText}`);
         }

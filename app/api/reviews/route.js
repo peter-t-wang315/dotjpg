@@ -30,6 +30,10 @@ export async function GET(req) {
     return x;
   });
 
+  // const averageStars =
+  //   result.reduce((acc, x) => acc + x.stars, 0) / result.length;
+
+  // return NextResponse.json([...result, averageStars], { status: 200 });
   return NextResponse.json(result, { status: 200 });
 }
 
