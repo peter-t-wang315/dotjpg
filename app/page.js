@@ -1,24 +1,37 @@
 "use client";
 import MainSetDisplay from "@/components/MainSetDisplay";
-import { useState } from "react";
-import { useEffect } from "react";
-import { applyMiddleware } from "./api/middleware";
-
-const defaultSets = [
-  ["Trafalgar Square", "/images/lego-set1.jpg"],
-  ["City Block", "/images/lego-set2.jpg"],
-  ["Heavy Cargo Transport", "/images/lego-set3.jpg"],
-  ["Bengal Tiger", "/images/lego-set4.jpg"],
-  ["Police Station", "/images/lego-set5.jpg"],
-  ["Jungle Raider", "/images/lego-set6.jpg"],
-];
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [legoSets, setLegoSets] = useState(defaultSets);
+  const [legoSets, setLegoSets] = useState([]);
+  const [initialSets, setInitialSets] = useState([]);
   const [session, setSession] = useState({});
   const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const { push } = useRouter();
 
   useEffect(() => {
+    const getPopularSets = async () => {
+      const currentURL = window.location.origin;
+      try {
+        const response = await fetch(`${currentURL}/api/legosets/popular`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setLegoSets(data);
+          setInitialSets(data);
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    getPopularSets();
+
     const session_id = sessionStorage.getItem("id");
     if (!session_id) {
       window.location.href = "/login";
@@ -38,7 +51,7 @@ export default function Home() {
     };
 
     getSessionData(session_id);
-  }, []);
+  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
 
   useEffect(() => {
     console.log(session); // Log session whenever it changes
@@ -49,6 +62,33 @@ export default function Home() {
     }
   }, [isLoading, session]);
 
+  const submitLegoSetSearch = async (searchQuery) => {
+    const currentURL = window.location.origin;
+    if (searchQuery) {
+      try {
+        const response = await fetch(
+          `${currentURL}/api/legosets/search?name=${encodeURIComponent(
+            searchQuery
+          )}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setLegoSets(data);
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    } else {
+      setLegoSets(initialSets);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col items-center justify-center pb-7 w-full gap-3">
@@ -57,13 +97,25 @@ export default function Home() {
           className="input-primary w-1/3"
           name="query"
           placeholder="Enter LEGO set name..."
+          // value={searchQuery}
+          onChange={async (e) => {
+            await submitLegoSetSearch(e.target.value);
+          }}
         />
-        <button className="btn-primary">Submit</button>
       </div>
       <h3>Check out our most frequently visited Lego sets</h3>
       <div className="grid grid-cols-3 w-full gap-5">
         {legoSets?.map((set, index) => (
-          <MainSetDisplay key={index} image={set[1]} title={set[0]} />
+          <MainSetDisplay
+            id={set.id}
+            key={index}
+            image={set.image}
+            title={set.name}
+            brick_count={set.numParts}
+            year={set.year}
+            rating={Math.round(set.averageReviewStars)}
+            push={push}
+          />
         ))}
       </div>
     </>

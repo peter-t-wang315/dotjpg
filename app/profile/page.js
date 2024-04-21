@@ -1,5 +1,9 @@
+"use client";
 import ProfileReviewCard from "@/components/ProfileReviewCard";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const profilePic = "/images/profilePic.png";
 const firstName = "John";
@@ -17,6 +21,7 @@ const reviews = [
 ];
 
 export default function Index() {
+  const { push } = useRouter();
   return (
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/6 items-center">
@@ -25,7 +30,14 @@ export default function Index() {
           {firstName} {lastName}
         </h1>
         <p className="mb-3">{userName}</p>
-        <button className="btn-primary">Edit Profile</button>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            push("/editProfile");
+          }}
+        >
+          Edit Profile
+        </button>
       </div>
       <div className="flex flex-col w-5/6">
         <h2>Bio</h2>
@@ -41,6 +53,7 @@ export default function Index() {
           ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

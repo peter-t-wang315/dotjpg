@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Specify protected and public routes
-const protectedRoutes = ["/"];
-const publicRoutes = ["/login", "/signup"];
+const protectedRoutes = ["/api/reviews", "/api/users/bio"];
 
 export async function applyMiddleware(req) {
   const path = req.nextUrl.pathname;
