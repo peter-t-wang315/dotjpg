@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function SetReviewBlock({
   username,
+  userID,
   rating,
   review,
   createdAt,
@@ -14,8 +15,9 @@ export default function SetReviewBlock({
   const deleteReview = async () => {
     const currentURL = window.location.origin;
     try {
+      console.log(userID);
       const response = await fetch(
-        `${currentURL}/api/reviews?userName=${encodeURIComponent(username)}`,
+        `${currentURL}/api/reviews?id=${encodeURIComponent(userID)}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },

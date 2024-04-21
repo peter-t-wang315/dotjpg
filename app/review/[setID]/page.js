@@ -57,6 +57,7 @@ export default function Index({ params }) {
         if (response.ok) {
           const data = await response.json();
           setReviews(data);
+          console.log(data);
         } else {
           toast.error(`Failed to fetch data: ${response.statusText}`);
         }
@@ -97,6 +98,7 @@ export default function Index({ params }) {
           <SetReviewBlock
             key={index}
             username={review.reviewer}
+            userID={review.userID}
             rating={review.stars}
             review={review.review}
             createdAt={dateToString(review.createdAt)}
