@@ -16,6 +16,7 @@ export async function GET(req) {
       user: {
         select: {
           name: true,
+          Review: true,
         },
       },
     },
@@ -23,7 +24,8 @@ export async function GET(req) {
 
   const result = matchingReviews.map((x) => {
     x.reviewer = x.user.name;
-    // x.reviewer_id = x.user.id;
+    x.Review = undefined;
+    x.userReviewCount = x.user.Review.length;
     x.user = undefined;
     return x;
   });
@@ -65,11 +67,17 @@ export async function POST(req) {
 // Deletes review. Soft deletion would be better, although its more complex and doesn't offer benefit for our use case
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
-  const id = Number(searchParams.get("id"));
+  const userIDParam = searchParams.get("userID");
+  const legosetIDParam = searchParams.get("legosetID");
+  const userID = Number(userIDParam);
+  const legoSetID = Number(legosetIDParam);
 
   const deletedReview = await prisma.Review.delete({
     where: {
-      userID: id,
+      reviewID: {
+        userID: userID,
+        legosetID: legoSetID,
+      },
     },
   });
 

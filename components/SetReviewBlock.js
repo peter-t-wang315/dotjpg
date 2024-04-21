@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function SetReviewBlock({
   username,
   userID,
+  reviewCount,
   rating,
   review,
   createdAt,
@@ -43,6 +44,7 @@ export default function SetReviewBlock({
         ) : (
           <h4 className="font-semibold">{username}</h4>
         )}
+        <p>{reviewCount} Reviews</p>
         <p>{createdAt}</p>
         <RatingStars numStars={rating} />
         {isAdmin && (

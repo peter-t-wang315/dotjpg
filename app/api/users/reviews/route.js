@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// edit user bio endpoint
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const param = searchParams.get("userID");

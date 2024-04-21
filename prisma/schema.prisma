@@ -46,5 +46,5 @@ model Review {
   legoset   Legoset @relation(fields: [legosetID], references: id)
   createdAt DateTime  @default(now())
 
-  @@id([userID, legosetID])
+  @@id(name: "reviewID", [userID, legosetID])
 }
