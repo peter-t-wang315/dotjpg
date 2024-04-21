@@ -15,14 +15,18 @@ export async function GET(req) {
     include: {
       user: {
         select: {
-          name: true
+          name: true,
+          Review: true
         }
       }
+      }
     }
-  });
+  );
 
   const result = matchingReviews.map(x => {
     x.reviewer = x.user.name;
+    x.Review = undefined;
+    x.userReviewCount = x.user.Review.length;
     x.user = undefined;
     return x;
   });

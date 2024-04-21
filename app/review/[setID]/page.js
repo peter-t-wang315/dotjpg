@@ -94,6 +94,7 @@ export default function Index({ params }) {
       {reviews?.length ?? 0 > 0 ? reviews.map((review, index) => (
         <SetReviewBlock
           username={review.reviewer}
+          reviewCount={review.userReviewCount}
           rating={review.stars}
           review={review.review}
           createdAt={dateToString(review.createdAt)}
