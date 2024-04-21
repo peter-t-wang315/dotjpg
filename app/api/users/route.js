@@ -2,6 +2,21 @@ import { NextResponse } from "next/server";
 import { PrismaClientKnownRequestError } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const name = searchParams.get("name");
+
+    const user = await prisma.User.findUnique({
+      where: {
+        name: name,
+      },
+    });
+    return NextResponse.json({ user }, { status: 200 });
+  } catch (error) {
+    return NextResponse.error("Internal Server Error", { status: 500 });
+  }
+}
 
 // register user endpoint
 export async function POST(req) {
@@ -47,15 +62,15 @@ export async function DELETE(req) {
 
   const deletedReviews = await prisma.Review.deleteMany({
     where: {
-      userID: userID
-    }
+      userID: userID,
+    },
   });
 
   const deletedUser = await prisma.user.delete({
     where: {
-      id: userID
-    }
+      id: userID,
+    },
   });
 
-  return NextResponse.json({deletedUser}, { status: 200 });
+  return NextResponse.json({ deletedUser }, { status: 200 });
 }

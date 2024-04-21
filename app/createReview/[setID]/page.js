@@ -4,7 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+
+const userID = 3;
 
 export default function Index({ params }) {
   const legoSetID = Number(params.setID);
@@ -15,7 +17,7 @@ export default function Index({ params }) {
   const [rating, setRating] = useState(0);
   const [userRating, setUserRating] = useState(3);
   const [review, setReview] = useState("");
-  
+
   const { push } = useRouter();
 
   useEffect(() => {
@@ -36,10 +38,10 @@ export default function Index({ params }) {
           setYear(data.year);
           setSetImage(`data:image/jpeg;base64,${data.image}`);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {position: bottom-left});
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {position: bottom-left});
+        toast.error(`Error fetching data: ${error}`);
       }
     };
 
@@ -63,18 +65,18 @@ export default function Index({ params }) {
         body: JSON.stringify({
           review: review,
           stars: userRating,
-          userID: 1,
+          userID: userID,
           legosetID: legoSetID,
         }),
       });
       if (response.ok) {
-        toast.success("Successfully uploaded review", { position: bottom-left});
+        toast.success("Successfully uploaded review");
         push(`/review/${legoSetID}`);
       } else {
-        toast.error(`${response.statusText}`); 
+        toast.error(`${response.statusText}`);
       }
     } catch (error) {
-      toast.error(`Error uploading review: ${error}`, {position: bottom-left});
+      toast.error(`Error uploading review: ${error}`);
     }
   };
 
@@ -116,9 +118,9 @@ export default function Index({ params }) {
         <button className="btn-primary self-end mt-2" onClick={handleSubmit}>
           Submit
         </button>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

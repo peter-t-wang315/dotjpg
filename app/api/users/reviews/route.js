@@ -16,14 +16,18 @@ export async function GET(req) {
     where: {
       id: userID,
     },
-
   });
 
   return NextResponse.json(
-   {
-    user: user.name,
-    bio: user.bio,
-    isAdmin: user.isAdmin,
-    reviews: reviews.map(x => {x.userID = undefined; return x; })
-  },  { status: 200 });
+    {
+      user: user.name,
+      bio: user.bio,
+      isAdmin: user.isAdmin,
+      reviews: reviews.map((x) => {
+        x.userID = undefined;
+        return x;
+      }),
+    },
+    { status: 200 }
+  );
 }

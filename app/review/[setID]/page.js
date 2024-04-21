@@ -5,7 +5,7 @@ import RatingStars from "@/components/RatingStars";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { dateToString } from "@/util/util";
 
 export default function Index({ params }) {
@@ -16,6 +16,7 @@ export default function Index({ params }) {
   const [year, setYear] = useState("");
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(true);
   const { push } = useRouter();
 
   useEffect(() => {
@@ -34,12 +35,13 @@ export default function Index({ params }) {
           setSetName(data.name);
           setPieceCount(data.numParts);
           setYear(data.year);
-          setSetImage(`data:image/jpeg;base64,${data.image}`);
+          setRating(data.averageReviewStars);
+          setSetImage(`data:image/jpeg;base64,${data?.image}`);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {position: bottom-left});
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {position: bottom-left});
+        toast.error(`Error fetching data: ${error}`);
       }
     };
 
@@ -57,12 +59,12 @@ export default function Index({ params }) {
           const data = await response.json();
           setReviews(data);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {position: bottom-left});
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {position: bottom-left});
+        toast.error(`Error fetching data: ${error}`);
       }
-    }
+    };
 
     getSetData();
     getSetReviews();
@@ -78,10 +80,10 @@ export default function Index({ params }) {
             <p>Piece Count: {pieceCount}</p>
             <p>Year: {year}</p>
           </div>
-          <div className="flex justify-between w-full mt-6">
+          <div className="flex flex-col gap-5 w-full items-end">
             <RatingStars numStars={rating} />
             <button
-              className="btn-primary self-end"
+              className="btn-primary"
               onClick={() => {
                 push(`/createReview/${legoSetID}`);
               }}
@@ -91,18 +93,24 @@ export default function Index({ params }) {
           </div>
         </div>
       </div>
-      {reviews?.length ?? 0 > 0 ? reviews.map((review, index) => (
-        <SetReviewBlock
-          username={review.reviewer}
-          reviewCount={review.userReviewCount}
-          rating={review.stars}
-          review={review.review}
-          createdAt={dateToString(review.createdAt)}
-        />
-        )) : 
+      {reviews?.length > 0 ? (
+        reviews.map((review, index) => (
+          <SetReviewBlock
+            key={index}
+            username={review.reviewer}
+            userID={review.userID}
+            legoSetID={legoSetID}
+            rating={review.stars}
+            review={review.review}
+            createdAt={dateToString(review.createdAt)}
+            isAdmin={isAdmin}
+          />
+        ))
+      ) : (
         <p>No Reviews for this set</p>
-      }
-      <ToastContainer/>
+      )}
+
+      <ToastContainer />
     </div>
   );
 }

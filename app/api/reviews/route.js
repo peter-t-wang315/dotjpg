@@ -16,14 +16,13 @@ export async function GET(req) {
       user: {
         select: {
           name: true,
-          Review: true
-        }
-      }
-      }
-    }
-  );
+          Review: true,
+        },
+      },
+    },
+  });
 
-  const result = matchingReviews.map(x => {
+  const result = matchingReviews.map((x) => {
     x.reviewer = x.user.name;
     x.Review = undefined;
     x.userReviewCount = x.user.Review.length;
@@ -31,6 +30,10 @@ export async function GET(req) {
     return x;
   });
 
+  // const averageStars =
+  //   result.reduce((acc, x) => acc + x.stars, 0) / result.length;
+
+  // return NextResponse.json([...result, averageStars], { status: 200 });
   return NextResponse.json(result, { status: 200 });
 }
 
@@ -46,11 +49,20 @@ export async function POST(req) {
         legosetID: legosetID,
       },
     });
-    
+
     return NextResponse.json(newReview, { status: 200 });
-  } catch(error) {
-    if(error instanceof Prisma.PrismaClientKnownRequestError) {
-      return NextResponse.json(`${error.code} prisma error occured during create`, {status: 500});
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        return NextResponse.json(`User already created review for this set`, {
+          status: 409,
+          statusText: `User already created review for this set`,
+        });
+      }
+      return NextResponse.json(
+        `${error.code} prisma error occured during create`,
+        { status: 500 }
+      );
     }
     return NextResponse.json(error, { status: 500 });
   }
@@ -60,18 +72,18 @@ export async function POST(req) {
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
   const userIDParam = searchParams.get("userID");
-  const legosetIDParam = searchParams.get("legosetID");
+  const legoSetIDParam = searchParams.get("legosetID");
   const userID = Number(userIDParam);
-  const legoSetID = Number(legosetIDParam);
+  const legoSetID = Number(legoSetIDParam);
 
   const deletedReview = await prisma.Review.delete({
     where: {
       reviewID: {
         userID: userID,
-        legosetID: legoSetID
-      }
-    }
+        legosetID: legoSetID,
+      },
+    },
   });
 
-  return NextResponse.json({deletedReview}, { status: 200 });
+  return NextResponse.json({ deletedReview }, { status: 200 });
 }

@@ -25,19 +25,15 @@ export default function Index() {
         }),
       });
       if (response.ok) {
-        toast.success("Successfully updated account", {
-          position: bottom - left,
-        });
+        toast.success("Successfully updated account");
         push("/profile");
       } else {
-        toast.error(`Error uploading data`, {
-          position: bottom - left,
-        });
+        toast.error(`Error uploading data`);
         console.log("We broke");
       }
     } catch (error) {
       console.log("ERror");
-      toast.error(`Error fetching data:${error}`, { position: bottom - left });
+      toast.error(`Error fetching data:${error}`);
     }
   };
 
