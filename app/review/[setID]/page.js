@@ -108,6 +108,7 @@ export default function Index({ params }) {
             rating={review.stars}
             review={review.review}
             createdAt={dateToString(review.createdAt)}
+            isAdmin={isAdmin}
           />
         ))
       ) : (
