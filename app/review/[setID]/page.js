@@ -80,10 +80,10 @@ export default function Index({ params }) {
             <p>Piece Count: {pieceCount}</p>
             <p>Year: {year}</p>
           </div>
-          <div className="flex justify-between w-full mt-6">
+          <div className="flex flex-col gap-5 w-full items-end">
             <RatingStars numStars={rating} />
             <button
-              className="btn-primary self-end"
+              className="btn-primary"
               onClick={() => {
                 push(`/createReview/${legoSetID}`);
               }}
