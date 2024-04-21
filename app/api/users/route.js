@@ -67,7 +67,7 @@ export async function DELETE(req) {
     },
   });
 
-  const deletedUser = await prisma.user.delete({
+  const deletedUser = await prisma.User.delete({
     where: {
       id: userID,
     },

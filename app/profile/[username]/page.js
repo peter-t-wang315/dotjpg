@@ -95,7 +95,27 @@ export default function Index({ params }) {
     }
   }, []);
 
-  const deleteUser = async () => {}; // TODO: can someone implement this
+  const deleteUser = async () => {
+    const currentURL = window.location.origin;
+    const params = new URLSearchParams();
+    params.append("id", encodeURIComponent(user.id));
+    const username = user.name;
+    try {
+      const response = await fetch(`${currentURL}/api/users?${params}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        toast.success(`Successfully deleted ${username}`);
+      } else {
+        toast.error(`Failed to delete ${username}'s review`);
+      }
+    } catch (error) {
+      toast.error(`Error deleting review: ${error}`);
+    }
+  };
 
   const goToReview = (legoSetID) => {
     push(`/review/${legoSetID}`);
