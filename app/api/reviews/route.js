@@ -47,6 +47,12 @@ export async function POST(req) {
     return NextResponse.json(newReview, { status: 200 });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        return NextResponse.json(`User already created review for this set`, {
+          status: 409,
+          statusText: `User already created review for this set`,
+        });
+      }
       return NextResponse.json(
         `${error.code} prisma error occured during create`,
         { status: 500 }

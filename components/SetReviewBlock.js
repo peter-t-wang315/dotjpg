@@ -38,7 +38,7 @@ export default function SetReviewBlock({
       <div className="flex flex-col bg-background-darker w-1/6 pt-2 pb-3 px-3 rounded-l-md gap-2">
         {isAdmin ? (
           <Link href={`/profile/${username}`}>
-            <h4 className="font-semibold">{username}</h4>
+            <h4 className="font-semibold underline">{username}</h4>
           </Link>
         ) : (
           <h4 className="font-semibold">{username}</h4>
