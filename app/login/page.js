@@ -1,22 +1,43 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
 
-export default function Index() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await axios.post("/api/login", { email, password }); // Use the correct relative path for the API endpoint
-      console.log(response.data); // Log the response
-      // Optionally, you can redirect the user to another page upon successful login
+      console.log("Atempting Login");
+      console.log(JSON.stringify({ email, password }));
+
+      // Call your authentication endpoint to validate credentials
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.status === 200) {
+        const cookieHeader = await response.headers.get("Set-Cookie");
+        document.cookie = cookieHeader;
+        const data = await response.json();
+
+        //setSession({ id: data.id, eamil: data.email });
+        // Set up session upon successful authentication
+        sessionStorage.setItem("id", data.id);
+
+        window.location.href = "/";
+        //window.location.href = `/?id=${encodeURIComponent(data.id)}`; // Redirect to dashboard upon successful login
+        console.log("End of Login");
+      } else {
+        throw new Error("Invalid Credentials");
+      }
     } catch (error) {
-      setError(error.response.data.message); // Set error message if login fails
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -57,7 +78,7 @@ export default function Index() {
         </div>
         <div className="form-group mb-4">
           <input className="btn-primary mr-2" type="submit" value="Login" />
-          <a href="signupPage.html">Sign Up</a>
+          <a href="/signup">Sign Up</a>
         </div>
       </form>
     </div>

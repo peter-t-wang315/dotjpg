@@ -1,6 +1,8 @@
 "use client";
 import MainSetDisplay from "@/components/MainSetDisplay";
 import { useState } from "react";
+import { useEffect } from "react";
+import { applyMiddleware } from "./api/middleware";
 
 const defaultSets = [
   ["Trafalgar Square", "/images/lego-set1.jpg"],
@@ -13,12 +15,39 @@ const defaultSets = [
 
 export default function Home() {
   const [legoSets, setLegoSets] = useState(defaultSets);
+  const [session, setSession] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
-  //Add check to see if valid user
+  useEffect(() => {
+    const session_id = sessionStorage.getItem("id");
+    if (!session_id) {
+      window.location.href = "/login";
+    }
 
-  //If not valid user, redirect to login page
+    const getSessionData = async (session_id) => {
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: parseInt(session_id) }),
+      });
+      const data = await response.json();
+      setSession(data); // Update session state
+      setIsLoading(false); // Update loading state
+    };
 
-  //Else display menu
+    getSessionData(session_id);
+  }, []);
+
+  useEffect(() => {
+    console.log(session); // Log session whenever it changes
+
+    // Check if session is empty and redirect to login if so
+    if (!isLoading && (!session || Object.keys(session).length === 0)) {
+      window.location.href = "/login"; // Redirect to login page
+    }
+  }, [isLoading, session]);
 
   return (
     <>
