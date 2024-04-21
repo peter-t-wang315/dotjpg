@@ -43,6 +43,10 @@ export default function Index() {
     fetchState();
   }, []);
 
+  const goToReview = (legoSetID) => {
+    push(`/review/${legoSetID}`);
+  };
+
   return (
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/6 items-center">
@@ -74,6 +78,7 @@ export default function Index() {
               setID={review.legosetID}
               rating={review.stars}
               timeCreated={dateToString(review.createdAt)}
+              goToReview={goToReview}
             />
           ))}
           <ToastContainer />

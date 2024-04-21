@@ -68,7 +68,11 @@ export default function Index({ params }) {
     fetchState();
   }, []);
 
-  const deleteUser = async () => {};
+  const deleteUser = async () => {}; // TODO: can someone implement this
+
+  const goToReview = (legoSetID) => {
+    push(`/review/${legoSetID}`);
+  };
 
   return (
     <div className="flex w-full gap-10">
@@ -95,6 +99,7 @@ export default function Index({ params }) {
               setID={review.legosetID}
               rating={review.stars}
               timeCreated={dateToString(review.createdAt)}
+              goToReview={goToReview}
             />
           ))}
           <ToastContainer />
