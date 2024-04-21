@@ -47,8 +47,9 @@ export default function Index() {
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/6 items-center">
         <Image src={profilePic} width={200} height={200} alt={`Image`} />
-        <h1> {user} </h1>
-        {isAdmin && <p>Admin</p>}
+        <h1>{user}</h1>
+        <h3>{reviews?.length ?? 0} Reviews</h3>
+        {!isAdmin && <p>Administrator</p>}
         <button
           className="btn-primary"
           onClick={() => {
@@ -61,6 +62,7 @@ export default function Index() {
       <div className="flex flex-col w-5/6">
         <h2>Bio</h2>
         <p>{bio}</p>
+
         <h2 className="mt-10">Most Recent Reviews</h2>
         <div className="grid grid-cols-3 gap-5">
           {reviews?.map((review, index) => (
