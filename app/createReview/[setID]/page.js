@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const userID = 3;
+const userID = 1;
 
 export default function Index({ params }) {
   const legoSetID = Number(params.setID);

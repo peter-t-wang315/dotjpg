@@ -68,6 +68,8 @@ export default function Index({ params }) {
     fetchState();
   }, []);
 
+  const deleteUser = async () => {};
+
   return (
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/6 items-center">

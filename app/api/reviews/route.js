@@ -72,7 +72,7 @@ export async function POST(req) {
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
   const userIDParam = searchParams.get("userID");
-  const legoSetIDParam = searchParams.get("legosetID");
+  const legoSetIDParam = searchParams.get("legoSetID");
   const userID = Number(userIDParam);
   const legoSetID = Number(legoSetIDParam);
 
