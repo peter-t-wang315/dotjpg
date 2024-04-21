@@ -17,7 +17,13 @@ export default function MainNav() {
         <Image src="/images/brick-icon.png" width={65} height={65} />
       </div>
       <div className="flex items-center gap-3">
-        <button className="btn-primary" type="submit">
+        <button
+          className="btn-primary"
+          type="submit"
+          onClick={() => {
+            push("/logout");
+          }}
+        >
           Log Out
         </button>
         <Image
