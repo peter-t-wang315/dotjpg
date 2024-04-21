@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const profilePic = "/images/profilePic.png";
 
+// TODO: Don't allow non-admins in here
+
 export default function Index({ params }) {
   const userName = params.username;
   const { push } = useRouter();
@@ -73,7 +75,13 @@ export default function Index({ params }) {
         <Image src={profilePic} width={200} height={200} alt={`Image`} />
         <h1>{user.name}</h1>
         <h3>{reviews?.length ?? 0} Reviews</h3>
-        {isAdmin && <p>Administrator</p>}
+        {isAdmin ? (
+          <p className="border border-black px-3 rounded-full bg-background-darker mt-1">
+            Administrator
+          </p>
+        ) : (
+          <button className="btn-primary mt-5">Delete User</button>
+        )}
       </div>
       <div className="flex flex-col w-5/6">
         <h2>Bio</h2>

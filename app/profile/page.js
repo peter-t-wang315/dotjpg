@@ -49,9 +49,13 @@ export default function Index() {
         <Image src={profilePic} width={200} height={200} alt={`Image`} />
         <h1>{user}</h1>
         <h3>{reviews?.length ?? 0} Reviews</h3>
-        {!isAdmin && <p>Administrator</p>}
+        {isAdmin && (
+          <p className="border border-black px-3 rounded-full bg-background-darker mt-1">
+            Administrator
+          </p>
+        )}
         <button
-          className="btn-primary"
+          className="btn-primary mt-5"
           onClick={() => {
             push("/editProfile");
           }}
