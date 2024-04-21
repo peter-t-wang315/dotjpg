@@ -47,15 +47,15 @@ export default function LoginPage() {
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-4">
-          <label className="textBoxText" htmlFor="username">
-            Username:
+          <label className="textBoxText" htmlFor="email">
+            Email:
           </label>
           <br />
           <input
             className="input-primary"
             type="text"
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

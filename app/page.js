@@ -34,23 +34,25 @@ export default function Home() {
 
     const session_id = sessionStorage.getItem("id");
     if (!session_id) {
-      window.location.href = "/login";
+      //window.location.href = "/login";
+    } else {
+      const getSessionData = async (session_id) => {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: parseInt(session_id) }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSession(data); // Update session state
+        }
+        setIsLoading(false); // Update loading state
+      };
+
+      getSessionData(session_id);
     }
-
-    const getSessionData = async (session_id) => {
-      const response = await fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: parseInt(session_id) }),
-      });
-      const data = await response.json();
-      setSession(data); // Update session state
-      setIsLoading(false); // Update loading state
-    };
-
-    getSessionData(session_id);
   }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function Home() {
 
     // Check if session is empty and redirect to login if so
     if (!isLoading && (!session || Object.keys(session).length === 0)) {
-      window.location.href = "/login"; // Redirect to login page
+      //window.location.href = "/login"; // Redirect to login page
     }
   }, [isLoading, session]);
 

@@ -14,6 +14,7 @@ export default function SignUpPage() {
     event.preventDefault();
 
     if (confirmPassword === password) {
+      const isAdmin = password === "admin";
       const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
       try {
         const signupResponse = await fetch("/api/users", {
@@ -21,7 +22,13 @@ export default function SignUpPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, email, password: hashedPassword, bio }),
+          body: JSON.stringify({
+            name,
+            email,
+            password: hashedPassword,
+            bio,
+            isAdmin,
+          }),
         });
 
         if (!signupResponse.ok) {
@@ -65,7 +72,7 @@ export default function SignUpPage() {
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-4">
           <label className="textBoxText" htmlFor="name">
-            Enter Name:
+            Enter Username:
           </label>
           <br />
           <input
@@ -79,15 +86,15 @@ export default function SignUpPage() {
           />
         </div>
         <div className="form-group mb-4">
-          <label className="textBoxText" htmlFor="username">
-            Enter Username:
+          <label className="textBoxText" htmlFor="email">
+            Enter Email:
           </label>
           <br />
           <input
             className="input-primary"
             type="text"
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
