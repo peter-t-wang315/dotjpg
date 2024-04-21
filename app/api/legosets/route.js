@@ -18,7 +18,7 @@ export async function GET(req) {
   return NextResponse.json(
     {
       ...set,
-      image: set?.Image.image.toString("utf8") ?? "",
+      image: set?.Image?.image.toString("utf8") ?? "",
       Image: undefined,
     },
     { status: 200 }

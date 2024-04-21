@@ -15,13 +15,13 @@ export async function GET(req) {
     include: {
       user: {
         select: {
-          name: true
-        }
-      }
-    }
+          name: true,
+        },
+      },
+    },
   });
 
-  const result = matchingReviews.map(x => {
+  const result = matchingReviews.map((x) => {
     x.reviewer = x.user.name;
     x.user = undefined;
     return x;
@@ -42,11 +42,14 @@ export async function POST(req) {
         legosetID: legosetID,
       },
     });
-    
+
     return NextResponse.json(newReview, { status: 200 });
-  } catch(error) {
-    if(error instanceof Prisma.PrismaClientKnownRequestError) {
-      return NextResponse.json(`${error.code} prisma error occured during create`, {status: 500});
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      return NextResponse.json(
+        `${error.code} prisma error occured during create`,
+        { status: 500 }
+      );
     }
     return NextResponse.json(error, { status: 500 });
   }
