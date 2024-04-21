@@ -15,7 +15,6 @@ export default function Index() {
   const handleSubmit = async () => {
     const currentURL = window.location.origin;
     try {
-      console.log("We in here");
       const response = await fetch(`${currentURL}/api/users/bio`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

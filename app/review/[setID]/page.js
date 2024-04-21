@@ -70,6 +70,42 @@ export default function Index({ params }) {
     getSetReviews();
   }, []);
 
+  const deleteReview = async (userID, username) => {
+    const currentURL = window.location.origin;
+    const params = new URLSearchParams();
+    params.append("userID", encodeURIComponent(userID));
+    params.append("legoSetID", encodeURIComponent(legoSetID));
+    try {
+      const response = await fetch(`${currentURL}/api/reviews?${params}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        // Set the new reviews after one has been deleted
+        const updatedReviews = reviews.filter(
+          (review) => review.userID !== data.deletedReview.userID
+        );
+        setReviews(updatedReviews);
+
+        // Set the new average star rating
+        const averageStars =
+          updatedReviews.length > 0
+            ? updatedReviews.reduce((acc, review) => acc + review.stars, 0) /
+              updatedReviews.length
+            : 0;
+        setRating(averageStars);
+
+        toast.success(`Successfully deleted ${username}'s review`);
+      } else {
+        toast.error(`Failed to delete ${username}'s review`);
+      }
+    } catch (error) {
+      toast.error(`Error deleting review: ${error}`);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="flex flex-col items-center border border-black rounded-lg p-4 mb-2">
@@ -99,11 +135,11 @@ export default function Index({ params }) {
             key={index}
             username={review.reviewer}
             userID={review.userID}
-            legoSetID={legoSetID}
             rating={review.stars}
             review={review.review}
             createdAt={dateToString(review.createdAt)}
             isAdmin={isAdmin}
+            deleteReview={deleteReview}
           />
         ))
       ) : (
