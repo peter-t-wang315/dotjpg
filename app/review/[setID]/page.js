@@ -37,14 +37,10 @@ export default function Index({ params }) {
           setYear(data.year);
           setSetImage(`data:image/jpeg;base64,${data?.image}`);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {
-            position: bottom - left,
-          });
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {
-          position: bottom - left,
-        });
+        toast.error(`Error fetching data: ${error}`);
       }
     };
 
@@ -62,14 +58,10 @@ export default function Index({ params }) {
           const data = await response.json();
           setReviews(data);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {
-            position: bottom - left,
-          });
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {
-          position: bottom - left,
-        });
+        toast.error(`Error fetching data: ${error}`);
       }
     };
 

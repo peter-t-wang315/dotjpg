@@ -11,11 +11,11 @@ const profilePic = "/images/profilePic.png";
 
 export default function Index() {
   const { push } = useRouter();
-  const [user, setUser] = useState('');
-  const [bio, setBio] = useState('');
+  const [user, setUser] = useState("");
+  const [bio, setBio] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [reviews, setReviews] = useState([]);
-  
+
   useEffect(() => {
     const fetchState = async () => {
       const currentURL = window.location.origin;
@@ -34,14 +34,14 @@ export default function Index() {
           setIsAdmin(data.isAdmin);
           setReviews(data.reviews);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {position: bottom-left});
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {position: bottom-left});
+        toast.error(`Error fetching data: ${error}`);
       }
-    }
+    };
     fetchState();
-  }, [])
+  }, []);
 
   return (
     <div className="flex w-full gap-10">
@@ -72,7 +72,7 @@ export default function Index() {
               timeCreated={dateToString(review.createdAt)}
             />
           ))}
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       </div>
       <ToastContainer />

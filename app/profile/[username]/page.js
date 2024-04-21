@@ -20,6 +20,7 @@ export default function Index({ params }) {
   useEffect(() => {
     const fetchState = async () => {
       const currentURL = window.location.origin;
+      console.log("user", userName);
       try {
         const response = await fetch(
           `${currentURL}/api/users/reviews?userID=${encodeURIComponent(
@@ -37,14 +38,10 @@ export default function Index({ params }) {
           setIsAdmin(data.isAdmin);
           setReviews(data.reviews);
         } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`, {
-            position: bottom - left,
-          });
+          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
       } catch (error) {
-        toast.error(`Error fetching data: ${error}`, {
-          position: bottom - left,
-        });
+        toast.error(`Error fetching data: ${error}`);
       }
     };
     fetchState();
