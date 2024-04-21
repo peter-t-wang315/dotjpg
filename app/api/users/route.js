@@ -2,6 +2,22 @@ import { NextResponse } from "next/server";
 import { PrismaClientKnownRequestError } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const name = searchParams.get("name");
+
+    const user = await prisma.User.findUnique({
+      where: {
+        name: name,
+      },
+    });
+    return NextResponse.json({ user }, { status: 200 });
+  } catch (error) {
+    return NextResponse.error("Internal Server Error", { status: 500 });
+  }
+}
+
 // register user endpoint
 export async function POST(req) {
   try {
@@ -36,4 +52,25 @@ export async function POST(req) {
       return NextResponse.error("Internal Server Error", { status: 500 });
     }
   }
+}
+
+// Deletes user and all of their reviews. Soft deletion would be better, although its more complex and doesn't offer benefit for our use case
+export async function DELETE(req) {
+  const { searchParams } = new URL(req.url);
+  const param = searchParams.get("id");
+  const userID = Number(param);
+
+  const deletedReviews = await prisma.Review.deleteMany({
+    where: {
+      userID: userID,
+    },
+  });
+
+  const deletedUser = await prisma.user.delete({
+    where: {
+      id: userID,
+    },
+  });
+
+  return NextResponse.json({ deletedUser }, { status: 200 });
 }

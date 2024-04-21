@@ -15,7 +15,6 @@ export default function Index() {
   const handleSubmit = async () => {
     const currentURL = window.location.origin;
     try {
-      console.log("We in here");
       const response = await fetch(`${currentURL}/api/users/bio`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,19 +24,15 @@ export default function Index() {
         }),
       });
       if (response.ok) {
-        toast.success("Successfully updated account", {
-          position: bottom - left,
-        });
+        toast.success("Successfully updated account");
         push("/profile");
       } else {
-        toast.error(`Error uploading data`, {
-          position: bottom - left,
-        });
+        toast.error(`Error uploading data`);
         console.log("We broke");
       }
     } catch (error) {
       console.log("ERror");
-      toast.error(`Error fetching data:${error}`, { position: bottom - left });
+      toast.error(`Error fetching data:${error}`);
     }
   };
 

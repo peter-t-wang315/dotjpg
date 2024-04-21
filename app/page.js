@@ -103,8 +103,12 @@ export default function Home() {
           }}
         />
       </div>
-      <h3>Check out our most frequently visited Lego sets</h3>
       <div className="grid grid-cols-3 w-full gap-5">
+        {legoSets === initialSets && (
+          <h3 className="flex col-span-3 justify-center -mb-4">
+            Check out the most popular Lego sets
+          </h3>
+        )}
         {legoSets?.map((set, index) => (
           <MainSetDisplay
             id={set.id}
