@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { PrismaClientKnownRequestError } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
+
 // register user endpoint
 export async function POST(req) {
   try {

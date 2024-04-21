@@ -44,6 +44,7 @@ model Review {
   legosetID Int
   user      User    @relation(fields: [userID], references: id)
   legoset   Legoset @relation(fields: [legosetID], references: id)
+  createdAt DateTime  @default(now())
 
   @@id([userID, legosetID])
 }
