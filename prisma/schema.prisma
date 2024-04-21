@@ -29,11 +29,12 @@ model LegosetImage {
 
 model User {
   id       Int      @id @default(autoincrement())
-  name     String
-  bio      String
+  name     String @unique
+  bio      String 
   password String
 	email		 String @unique
   Review   Review[]
+  isAdmin  Boolean  @default(false)
 }
 
 model Review {
@@ -43,6 +44,7 @@ model Review {
   legosetID Int
   user      User    @relation(fields: [userID], references: id)
   legoset   Legoset @relation(fields: [legosetID], references: id)
+  createdAt DateTime  @default(now())
 
   @@id([userID, legosetID])
 }
