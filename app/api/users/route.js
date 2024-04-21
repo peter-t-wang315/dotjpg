@@ -38,3 +38,24 @@ export async function POST(req) {
     }
   }
 }
+
+// Deletes user and all of their reviews. Soft deletion would be better, although its more complex and doesn't offer benefit for our use case
+export async function DELETE(req) {
+  const { searchParams } = new URL(req.url);
+  const param = searchParams.get("id");
+  const userID = Number(param);
+
+  const deletedReviews = await prisma.Review.deleteMany({
+    where: {
+      userID: userID
+    }
+  });
+
+  const deletedUser = await prisma.user.delete({
+    where: {
+      id: userID
+    }
+  });
+
+  return NextResponse.json({deletedUser}, { status: 200 });
+}
