@@ -72,9 +72,9 @@ export async function POST(req) {
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
   const userIDParam = searchParams.get("userID");
-  const legosetIDParam = searchParams.get("legosetID");
+  const legoSetIDParam = searchParams.get("legosetID");
   const userID = Number(userIDParam);
-  const legoSetID = Number(legosetIDParam);
+  const legoSetID = Number(legoSetIDParam);
 
   const deletedReview = await prisma.Review.delete({
     where: {

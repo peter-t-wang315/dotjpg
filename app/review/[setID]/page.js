@@ -99,6 +99,7 @@ export default function Index({ params }) {
             key={index}
             username={review.reviewer}
             userID={review.userID}
+            legoSetID={legoSetID}
             rating={review.stars}
             review={review.review}
             createdAt={dateToString(review.createdAt)}

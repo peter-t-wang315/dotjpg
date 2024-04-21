@@ -55,7 +55,6 @@ export default function Index({ params }) {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log("Data", data);
           setBio(data.bio);
           setIsAdmin(data.isAdmin);
           setReviews(data.reviews);
