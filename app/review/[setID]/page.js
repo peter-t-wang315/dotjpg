@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { dateToString } from "@/util/util";
 
 export default function Index({ params }) {
   const legoSetID = Number(params.setID);
@@ -93,9 +94,9 @@ export default function Index({ params }) {
       {reviews?.length ?? 0 > 0 ? reviews.map((review, index) => (
         <SetReviewBlock
           username={review.reviewer}
-          numReviews={review.numReviews}
           rating={review.stars}
           review={review.review}
+          createdAt={dateToString(review.createdAt)}
         />
         )) : 
         <p>No Reviews for this set</p>
