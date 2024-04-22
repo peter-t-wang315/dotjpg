@@ -24,7 +24,7 @@ export default function SetReviewBlock({
         ) : (
           <h4 className="font-semibold">{username}</h4>
         )}
-        <p>{reviewCount} Reviews</p>
+        <p>Reviews from user: {reviewCount}</p>
         <p>{createdAt}</p>
         <RatingStars numStars={rating} />
         {isAdmin && (

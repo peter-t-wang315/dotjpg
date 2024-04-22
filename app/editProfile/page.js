@@ -75,7 +75,6 @@ export default function Index() {
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/5 items-center gap-5">
         <Image src={profilePic} width={300} height={300} alt={`Image`} />
-        <button className="btn-primary">Edit Profile Picture</button>
       </div>
       <div className="flex flex-col w-4/5 gap-7 w-full">
         <div>
