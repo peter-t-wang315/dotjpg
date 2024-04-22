@@ -9,10 +9,10 @@ export default function Home() {
   const [session, setSession] = useState({});
   const [isLoading, setIsLoading] = useState(true); // Add loading state
   const { push } = useRouter();
+  const currentURL = 'http://localhost:3000';
 
   useEffect(() => {
     const getPopularSets = async () => {
-      const currentURL = window.location.origin;
       try {
         const response = await fetch(`${currentURL}/api/legosets/popular`, {
           method: "GET",
@@ -65,7 +65,6 @@ export default function Home() {
   }, [isLoading, session]);
 
   const submitLegoSetSearch = async (searchQuery) => {
-    const currentURL = window.location.origin;
     if (searchQuery) {
       try {
         const response = await fetch(
@@ -93,7 +92,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center pb-7 w-full gap-3">
+      <div className="flex flex-col items-center justify-center pb-7 w-full gap-3" suppressHydrationWarning>
         <h2>Search for a Lego set</h2>
         <input
           className="input-primary w-1/3"
@@ -105,7 +104,7 @@ export default function Home() {
           }}
         />
       </div>
-      <div className="grid grid-cols-3 w-full gap-5">
+      <div className="grid grid-cols-3 w-full gap-5" suppressHydrationWarning>
         {legoSets === initialSets && (
           <h3 className="flex col-span-3 justify-center -mb-4">
             Check out the most popular Lego sets

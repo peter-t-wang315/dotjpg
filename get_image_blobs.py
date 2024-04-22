@@ -28,7 +28,7 @@ def update_db(results):
       cursor.execute("""INSERT INTO LegosetImage (legosetid,image) VALUES(?, ?)""", (id, image))
 
 
-num_rows = 5000
+num_rows = 200
 half_point = num_rows // 2
 quarter_point = half_point // 2
 
