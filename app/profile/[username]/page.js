@@ -9,8 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const profilePic = "/images/profilePic.png";
 
-// TODO: Don't allow non-admins in here
-
 export default function Index({ params }) {
   const userName = params.username;
   const { push } = useRouter();
