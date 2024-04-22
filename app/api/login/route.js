@@ -28,10 +28,8 @@ export async function POST(req) {
     return new NextResponse("Invalid Username or Password", { status: 401 });
   }
   const sessionData = { email: user.email, id: user.id };
-  //const encryptedSessionData = encrypt(sessionData);
-  const encryptedSessionData = sessionData;
 
-  const cookie = serialize("session", encryptedSessionData, {
+  const cookie = serialize("session", sessionData, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 24 * 7, // One week

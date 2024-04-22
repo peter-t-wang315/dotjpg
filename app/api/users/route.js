@@ -55,6 +55,28 @@ export async function POST(req) {
   }
 }
 
+// edit user profile endpoint
+export async function PUT(req) {
+  const body = await req.json();
+  const { id, bio, name } = body;
+
+  const updatedUser = await prisma.User.update({
+    where: {
+      id: id,
+    },
+    data: {
+      bio: bio,
+      name: name,
+    },
+  });
+  return NextResponse.json(
+    { user: updatedUser.name, bio: updatedUser.bio },
+    { status: 200 }
+  );
+}
+
+
+
 // Deletes user and all of their reviews. Soft deletion would be better, although its more complex and doesn't offer benefit for our use case
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
