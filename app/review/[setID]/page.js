@@ -93,7 +93,7 @@ export default function Index({ params }) {
 
       getSessionData(session_id);
     }
-  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
+  }, []);
 
   useEffect(() => {
     console.log(session); // Log session whenever it changes

@@ -28,15 +28,17 @@ def update_db(results):
       cursor.execute("""INSERT INTO LegosetImage (legosetid,image) VALUES(?, ?)""", (id, image))
 
 
-num_rows = 5000
+num_rows = 200
 half_point = num_rows // 2
 quarter_point = half_point // 2
 
 rows1 = rows[:quarter_point]
 rows2 = rows[quarter_point:half_point]
 rows3 = rows[half_point:half_point+quarter_point]
-rows4 = rows[half_point+quarter_point:5000]
+rows4 = rows[half_point+quarter_point:num_rows]
 
+
+# This is multithreaded for when we want to load a large amount of images
 with ThreadPoolExecutor(max_workers=4) as executor:
   r1 = executor.map(download_image, rows1)
   r2 = executor.map(download_image, rows2)

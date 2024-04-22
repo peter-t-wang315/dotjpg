@@ -10,7 +10,7 @@ export async function GET(req) {
       take: 15,
       where: {
         name: {
-          contains: param, // This search is case insensitive, we need to modify the schema to change that
+          contains: param,
         },
       },
       include: {

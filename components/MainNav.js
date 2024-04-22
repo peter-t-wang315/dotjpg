@@ -13,7 +13,7 @@ export default function MainNav() {
     if (session_id) {
       setSession(true);
     }
-  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
+}, []);
 
   useEffect(() => {
     console.log(session); // Log session whenever it changes
