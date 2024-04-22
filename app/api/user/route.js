@@ -9,5 +9,13 @@ export async function POST(req) {
       id: body.id,
     },
   });
-  return NextResponse.json(userInfo, { status: 200 });
+  const reviewInfo = await prisma.review.findMany({
+    where: {
+      userID: body.id,
+    },
+  });
+
+  const output = { ...userInfo, reviews: [...reviewInfo] };
+
+  return NextResponse.json(output, { status: 200 });
 }

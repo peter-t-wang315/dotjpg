@@ -19,7 +19,6 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    let userID;
     const session_id = sessionStorage.getItem("id");
     if (!session_id) {
       window.location.href = "/login";
@@ -35,42 +34,18 @@ export default function Index() {
         if (response.ok) {
           const data = await response.json();
           setSession(data); // Update session state
-          userID = data.id;
           if (session?.isAdmin === false) {
             window.location.href = "/";
           }
+          setUser(data.name);
+          setBio(data.bio);
+          setIsAdmin(data.isAdmin);
+          setReviews(data.reviews);
         }
         setIsLoading(false); // Update loading state
       };
 
-      const fetchState = async () => {
-        const currentURL = window.location.origin;
-        try {
-          const response = await fetch(
-            `${currentURL}/api/users/reviews?userID=${encodeURIComponent(
-              parseInt(userID)
-            )}`, // TODO: use session?
-            {
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-            }
-          );
-          if (response.ok) {
-            const data = await response.json();
-            setUser(data.user);
-            setBio(data.bio);
-            setIsAdmin(data.isAdmin);
-            setReviews(data.reviews);
-          } else {
-            toast.error(`Failed to fetch data: ${response.statusText}`);
-          }
-        } catch (error) {
-          toast.error(`Error fetching data: ${error}`);
-        }
-      };
-
       getSessionData(session_id);
-      fetchState();
     }
   }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
 
