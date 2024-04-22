@@ -34,6 +34,7 @@ export async function POST(req) {
         bio: body.bio,
         password: body.password,
         email: body.email,
+        isAdmin: body.isAdmin,
       },
     });
 

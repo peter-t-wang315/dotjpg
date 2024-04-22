@@ -18,6 +18,8 @@ export default function Index({ params }) {
   const [bio, setBio] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [session, setSession] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     let userData;
@@ -66,6 +68,31 @@ export default function Index({ params }) {
       }
     };
     fetchState();
+
+    const session_id = sessionStorage.getItem("id");
+    if (!session_id) {
+      window.location.href = "/login";
+    } else {
+      const getSessionData = async (session_id) => {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: parseInt(session_id) }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSession(data); // Update session state
+          if (data.isAdmin === false) {
+            push("/");
+          }
+        }
+        setIsLoading(false); // Update loading state
+      };
+
+      getSessionData(session_id);
+    }
   }, []);
 
   const deleteUser = async () => {
@@ -82,6 +109,7 @@ export default function Index({ params }) {
         const data = await response.json();
 
         toast.success(`Successfully deleted ${username}`);
+        push("/");
       } else {
         toast.error(`Failed to delete ${username}'s review`);
       }
@@ -98,7 +126,7 @@ export default function Index({ params }) {
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/6 items-center">
         <Image src={profilePic} width={200} height={200} alt={`Image`} />
-        <h1>{user.name}</h1>
+        <h1 className="text-center">{user.name}</h1>
         <h3>{reviews?.length ?? 0} Reviews</h3>
         {isAdmin ? (
           <p className="border border-black px-3 rounded-full bg-background-darker mt-1">

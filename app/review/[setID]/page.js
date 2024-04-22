@@ -16,8 +16,10 @@ export default function Index({ params }) {
   const [year, setYear] = useState("");
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { push } = useRouter();
+  const [session, setSession] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const getSetData = async () => {
@@ -35,7 +37,7 @@ export default function Index({ params }) {
           setSetName(data.name);
           setPieceCount(data.numParts);
           setYear(data.year);
-          setRating(data.averageReviewStars);
+          setRating(Math.floor(data.averageReviewStars));
           setSetImage(`data:image/jpeg;base64,${data?.image}`);
         } else {
           toast.error(`Failed to fetch data: ${response.statusText}`);
@@ -68,7 +70,38 @@ export default function Index({ params }) {
 
     getSetData();
     getSetReviews();
-  }, []);
+
+    const session_id = sessionStorage.getItem("id");
+    if (session_id) {
+      const getSessionData = async (session_id) => {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: parseInt(session_id) }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSession(data); // Update session state
+
+          setIsAdmin(data.isAdmin);
+        }
+        setIsLoading(false); // Update loading state
+      };
+
+      getSessionData(session_id);
+    }
+  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
+
+  useEffect(() => {
+    console.log(session); // Log session whenever it changes
+
+    // Check if session is empty and redirect to login if so
+    if (!isLoading && (!session || Object.keys(session).length === 0)) {
+      //window.location.href = "/login"; // Redirect to login page
+    }
+  }, [isLoading, session]);
 
   const deleteReview = async (userID, username) => {
     const currentURL = window.location.origin;

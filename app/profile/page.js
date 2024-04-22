@@ -15,33 +15,48 @@ export default function Index() {
   const [bio, setBio] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [session, setSession] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    const fetchState = async () => {
-      const currentURL = window.location.origin;
-      try {
-        const response = await fetch(
-          `${currentURL}/api/users/reviews?userID=${encodeURIComponent(1)}`, // TODO: use session?
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+    const session_id = sessionStorage.getItem("id");
+    if (!session_id) {
+      window.location.href = "/login";
+    } else {
+      const getSessionData = async (session_id) => {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: parseInt(session_id) }),
+        });
         if (response.ok) {
           const data = await response.json();
-          setUser(data.user);
+          setSession(data); // Update session state
+          if (session?.isAdmin === false) {
+            window.location.href = "/";
+          }
+          setUser(data.name);
           setBio(data.bio);
           setIsAdmin(data.isAdmin);
           setReviews(data.reviews);
-        } else {
-          toast.error(`Failed to fetch data: ${response.statusText}`);
         }
-      } catch (error) {
-        toast.error(`Error fetching data: ${error}`);
-      }
-    };
-    fetchState();
-  }, []);
+        setIsLoading(false); // Update loading state
+      };
+
+      getSessionData(session_id);
+    }
+  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
+
+  useEffect(() => {
+    console.log(session); // Log session whenever it changes
+
+    // Check if session is empty and redirect to login if so
+    if (!isLoading && (!session || Object.keys(session).length === 0)) {
+      //window.location.href = "/login"; // Redirect to login page
+    }
+  }, [isLoading, session]);
 
   const goToReview = (legoSetID) => {
     push(`/review/${legoSetID}`);
@@ -51,7 +66,7 @@ export default function Index() {
     <div className="flex w-full gap-10">
       <div className="flex flex-col w-1/6 items-center">
         <Image src={profilePic} width={200} height={200} alt={`Image`} />
-        <h1>{user}</h1>
+        <h1 className="text-center">{user}</h1>
         <h3>{reviews?.length ?? 0} Reviews</h3>
         {isAdmin && (
           <p className="border border-black px-3 rounded-full bg-background-darker mt-1">

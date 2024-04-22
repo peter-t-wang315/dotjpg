@@ -1,18 +1,26 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { NextResponse } from "next/server";
 
-const protectedRoutes = ['/api/reviews', '/api/users/bio']
+const protectedRoutes = ["/api/reviews", "/api/users/bio"];
 
-export default async function middleware(req) {
+export async function applyMiddleware(req) {
   const path = req.nextUrl.pathname;
-  const isProtected = protectedRoutes.includes(path);
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
 
-  const cookie = cookies().get('session')?.value;
+  // Decrypt the session from the cookie
+  const cookie = req.headers.cookie;
   const session = await decrypt(cookie);
 
-  if(isProtected && !session?.email) {
-    return NextResponse.redirect(new URL('/api/login', req.nextUrl));
+  // Redirect to /login if the user is not authenticated
+  if (isProtectedRoute && !session?.userId) {
+    return NextResponse.redirect("/login");
   }
 
+  // Redirect to /dashboard if the user is authenticated
+  if (isPublicRoute && session?.userId) {
+    return NextResponse.redirect("/");
+  }
+
+  // No redirection needed
   return NextResponse.next();
 }

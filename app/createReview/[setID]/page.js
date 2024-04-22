@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const userID = 1;
-
 export default function Index({ params }) {
   const legoSetID = Number(params.setID);
   const [setName, setSetName] = useState("");
@@ -17,6 +15,9 @@ export default function Index({ params }) {
   const [rating, setRating] = useState(0);
   const [userRating, setUserRating] = useState(3);
   const [review, setReview] = useState("");
+  const [session, setSession] = useState({});
+  const [userID, setUserID] = useState(0);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   const { push } = useRouter();
 
@@ -46,8 +47,39 @@ export default function Index({ params }) {
     };
 
     getSetData();
-  }, []);
+    const session_id = sessionStorage.getItem("id");
+    if (!session_id) {
+      window.location.href = "/login";
+    } else {
+      const getSessionData = async (session_id) => {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: parseInt(session_id) }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSession(data); // Update session state
+          console.log(data);
+          setUserID(data.id);
+        }
+        setIsLoading(false); // Update loading state
+      };
 
+      getSessionData(session_id);
+    }
+  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
+
+  useEffect(() => {
+    console.log(session); // Log session whenever it changes
+
+    // Check if session is empty and redirect to login if so
+    if (!isLoading && (!session || Object.keys(session).length === 0)) {
+      //window.location.href = "/login"; // Redirect to login page
+    }
+  }, [isLoading, session]);
   const updateUserStars = (add) => {
     if (add && userRating < 5) {
       setUserRating(userRating + 1);
@@ -82,7 +114,12 @@ export default function Index({ params }) {
 
   return (
     <div className="flex gap-10">
-      <div className="flex flex-col w-1/4 border border-black rounded-lg p-5 items-center">
+      <div
+        className=" card-clickable w-1/4 p-5 items-center"
+        onClick={() => {
+          push(`/review/${legoSetID}`);
+        }}
+      >
         <h2>{setName}</h2>
         <Image src={setImage} width={375} height={375} alt={`Image`} />
         <div className="flex justify-between w-full mt-7">

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import bcrypt from "bcryptjs";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
@@ -13,23 +14,49 @@ export default function SignUpPage() {
     event.preventDefault();
 
     if (confirmPassword === password) {
+      const isAdmin = password === "admin";
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
       try {
-        const response = await fetch("/api/users", {
+        const signupResponse = await fetch("/api/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, email, password, bio }),
+          body: JSON.stringify({
+            name,
+            email,
+            password: hashedPassword,
+            bio,
+            isAdmin,
+          }),
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
+        if (!signupResponse.ok) {
           throw new Error(data.message || "Invalid Credentials");
         }
 
+        const loginResponse = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (loginResponse.status === 200) {
+          const cookieHeader = await loginResponse.headers.get("Set-Cookie");
+          document.cookie = cookieHeader;
+          const data = await loginResponse.json();
+
+          sessionStorage.setItem("id", data.id);
+
+          window.location.href = "/";
+          console.log("End of Login");
+        } else {
+          throw new Error("Invalid Credentials");
+        }
+
         console.log("Signup successful!");
-        // Redirect or show success message
       } catch (error) {
         setError(error.message);
       }
@@ -45,7 +72,7 @@ export default function SignUpPage() {
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-4">
           <label className="textBoxText" htmlFor="name">
-            Enter Name:
+            Enter Username:
           </label>
           <br />
           <input
@@ -59,15 +86,15 @@ export default function SignUpPage() {
           />
         </div>
         <div className="form-group mb-4">
-          <label className="textBoxText" htmlFor="username">
-            Enter Username:
+          <label className="textBoxText" htmlFor="email">
+            Enter Email:
           </label>
           <br />
           <input
             className="input-primary"
             type="text"
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -120,7 +147,7 @@ export default function SignUpPage() {
         </div>
         <div className="form-group mb-4">
           <input className="btn-primary mr-2" type="submit" value="Sign Up" />
-          <a href="signupPage.html">Already Have an Account?</a>
+          <a href="/login">Already Have an Account?</a>
         </div>
       </form>
     </div>

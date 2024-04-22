@@ -6,7 +6,63 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const [legoSets, setLegoSets] = useState([]);
   const [initialSets, setInitialSets] = useState([]);
+  const [session, setSession] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
   const { push } = useRouter();
+
+  useEffect(() => {
+    const getPopularSets = async () => {
+      const currentURL = window.location.origin;
+      try {
+        const response = await fetch(`${currentURL}/api/legosets/popular`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setLegoSets(data);
+          setInitialSets(data);
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    getPopularSets();
+
+    const session_id = sessionStorage.getItem("id");
+    if (!session_id) {
+      //window.location.href = "/login";
+    } else {
+      const getSessionData = async (session_id) => {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: parseInt(session_id) }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSession(data); // Update session state
+        }
+        setIsLoading(false); // Update loading state
+      };
+
+      getSessionData(session_id);
+    }
+  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
+
+  useEffect(() => {
+    console.log(session); // Log session whenever it changes
+
+    // Check if session is empty and redirect to login if so
+    if (!isLoading && (!session || Object.keys(session).length === 0)) {
+      //window.location.href = "/login"; // Redirect to login page
+    }
+  }, [isLoading, session]);
 
   const submitLegoSetSearch = async (searchQuery) => {
     const currentURL = window.location.origin;
@@ -34,35 +90,6 @@ export default function Home() {
       setLegoSets(initialSets);
     }
   };
-
-  useEffect(() => {
-    const getPopularSets = async () => {
-      const currentURL = window.location.origin;
-      try {
-        const response = await fetch(`${currentURL}/api/legosets/popular`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setLegoSets(data);
-          setInitialSets(data);
-        } else {
-          console.error("Failed to fetch data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    getPopularSets();
-  }, []); // a loading modal while the promise hasn't been fulfilled would be a nice touch
-
-  //Add check to see if valid user
-
-  //If not valid user, redirect to login page
-
-  //Else display menu
 
   return (
     <>
